@@ -106,7 +106,8 @@ st.markdown("""
     /* Styly pro buňky */
     td {
         padding: 10px;
-        color: #4FC3F7;
+        color: #FFFFFF
+;
         text-align: center;
         font-size: 0.95em;
     }
