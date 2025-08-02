@@ -55,10 +55,10 @@ df['Skóre'] = (
     .astype(float)
 )
 
-# Kompletní světlý styl pro Streamlit aplikaci
+# Kompletní styl pro Streamlit aplikaci s černým textem
 st.markdown("""
 <style>
-    /* Hlavní aplikace - světlé pozadí pro všechny */
+    /* Hlavní aplikace - bílé pozadí pro všechny */
     .stApp {
         background-color: #ffffff !important;
         color: black !important;
@@ -82,6 +82,25 @@ st.markdown("""
         background-color: #ffffff;
         color: black;
         font-family: 'Segoe UI', sans-serif;
+    }
+    
+    /* VŠECHEN TEXT V APLIKACI - ČERNÝ */
+    .stMarkdown, .stText, .stWrite,
+    .element-container p, .element-container div,
+    .stMarkdown p, .stMarkdown div,
+    .stSubheader, h1, h2, h3, h4, h5, h6 {
+        color: black !important;
+    }
+    
+    /* Metriky - černý text */
+    .metric-container, .metric-container .metric-value,
+    .metric-container .metric-label, .metric-container .metric-delta {
+        color: black !important;
+    }
+    
+    /* Selectbox label - černý text */
+    .stSelectbox label, .stSelectbox > label {
+        color: black !important;
     }
     
     /* Styly pro HTML tabulky */
@@ -157,6 +176,16 @@ st.markdown("""
     .stButton > button:hover {
         background-color: #f8f9fa;
         border-color: #adb5bd;
+    }
+    
+    /* Info boxy */
+    .stInfo {
+        color: black !important;
+    }
+    
+    /* Divs s inline styly */
+    div[style*="font-size: 1.1rem"] {
+        color: black !important;
     }
 </style>
 """, unsafe_allow_html=True)
