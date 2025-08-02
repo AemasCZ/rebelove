@@ -175,15 +175,21 @@ for hrac in hraci:
     if truhly.empty and hrady.empty:
         continue
 
-    # Průměrné pořadí a skóre pro truhly
+# Průměrné pořadí a skóre pro truhly (z posledních 10 her)
     p_truhla = truhly['Pořadí'].mean()
     s_truhla = truhly['Skóre'].mean()
-    max_truhla = truhly['Skóre'].max()
+    
+    # Osobní rekord pro truhly (ze VŠECH her, ne jen posledních 10)
+    truhly_vsechny = d[d['Event'].str.lower() == 'truhla']
+    max_truhla = truhly_vsechny['Skóre'].max()
 
-    # Průměrné pořadí a skóre pro hrady
+    # Průměrné pořadí a skóre pro hrady (z posledních 10 her)
     p_hrady = hrady['Pořadí'].mean()
     s_hrady = hrady['Skóre'].mean()
-    max_hrady = hrady['Skóre'].max()
+    
+    # Osobní rekord pro hrady (ze VŠECH her, ne jen posledních 10)
+    hrady_vsechny = d[d['Event'].str.lower() == 'hrady/bomby']
+    max_hrady = hrady_vsechny['Skóre'].max()
 
     # Vážený průměr pořadí
     vazeny = float('nan')
