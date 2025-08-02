@@ -1,20 +1,30 @@
 import streamlit as st
 import pandas as pd
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+from google.oauth2.service_account import Credentials
 import json
+import math
 
+# Nastavení přístupového rozsahu
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
 
+# Získání informací o službě z tajných dat ve Streamlitu
 service_account_info = json.loads(st.secrets["gcp_service_account"])
-credentials = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
 
+# Vytvoření přihlašovacích údajů pomocí Google Credentials z knihovny google-auth
+credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
+
+# Autorizace klienta knihovnou gspread
 client = gspread.authorize(credentials)
+
+# Otevření listu podle klíče
 sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
 worksheet = sheet.worksheet("výsledky")
 
 # Načtení dat
 data = worksheet.get_all_records()
+
+# Převod dat do Pandas DataFrame
 df = pd.DataFrame(data)
 
 # Odstraní první sloupec, pokud vypadá jako index
