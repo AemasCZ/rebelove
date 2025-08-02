@@ -208,6 +208,41 @@ st.markdown("""
     div[style*="font-size: 1.1rem"] {
         color: black !important;
     }
+    
+    /* AGRESIVNÍ přepsání selectbox stylů */
+    div[data-testid="stSelectbox"] > div > div > select,
+    div[data-testid="stSelectbox"] select,
+    .stSelectbox select,
+    select {
+        background-color: white !important;
+        color: black !important;
+        border: 1px solid #ced4da !important;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
+    }
+    
+    /* Dropdown options */
+    div[data-testid="stSelectbox"] option,
+    .stSelectbox option,
+    select option {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    /* Všechny Streamlit elementy s tmavým pozadím */
+    .st-emotion-cache-*, 
+    [class*="st-emotion-cache"] {
+        background-color: white !important;
+        color: black !important;
+    }
+    
+    /* Konkrétní override pro select elementy */
+    *[role="listbox"], *[role="option"] {
+        background-color: white !important;
+        color: black !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 # Definováni obrázků pro hráče
