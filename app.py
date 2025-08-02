@@ -55,44 +55,44 @@ df['Skóre'] = (
     .astype(float)
 )
 
-# Kompletní tmavý styl pro Streamlit aplikaci
+# Kompletní světlý styl pro Streamlit aplikaci
 st.markdown("""
 <style>
-    /* Hlavní aplikace - tmavé pozadí pro všechny */
+    /* Hlavní aplikace - světlé pozadí pro všechny */
     .stApp {
-        background-color: #1e1e1e !important;
-        color: white !important;
+        background-color: #ffffff !important;
+        color: black !important;
         font-family: 'Segoe UI', sans-serif;
     }
     
     /* Hlavní obsah */
     .main .block-container {
-        background-color: #1e1e1e !important;
-        color: white !important;
+        background-color: #ffffff !important;
+        color: black !important;
     }
     
     /* Sidebar */
     .sidebar .sidebar-content {
-        background-color: #2b2b2b !important;
-        color: white !important;
+        background-color: #f5f5f5 !important;
+        color: black !important;
     }
     
     /* Obecné styly pro tělo */
     body {
-        background-color: #1e1e1e;
-        color: white;
+        background-color: #ffffff;
+        color: black;
         font-family: 'Segoe UI', sans-serif;
     }
     
     /* Styly pro HTML tabulky */
     table {
-        background-color: #2b2b2b;
+        background-color: #f8f9fa;
         border-collapse: collapse;
         width: auto;
         max-width: 100%;
         border-radius: 10px;
         overflow-x: auto;
-        box-shadow: 0 0 10px rgba(0,0,0,0.4);
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
     }
     
     /* Zakáže zalamování textu ve všech buňkách a hlavičkách */
@@ -106,16 +106,15 @@ st.markdown("""
     /* Styly pro buňky */
     td {
         padding: 10px;
-        color: #FFFFFF
-;
+        color: #000000;
         text-align: center;
         font-size: 0.95em;
     }
     
     /* Styly pro hlavičky */
     th {
-        background-color: #444;
-        color: #ffcc00;
+        background-color: #e9ecef;
+        color: #007bff;
         padding: 10px;
         text-align: center;
         font-size: 1em;
@@ -125,43 +124,42 @@ st.markdown("""
     .dataframe th:nth-child(9),
     .dataframe th:nth-child(10),
     .dataframe th:nth-child(11) {
-        background-color: #3a3a3a !important;
+        background-color: #dee2e6 !important;
     }
     
     /* Streamlit dataframe styly */
     .stDataFrame {
-        background-color: #2b2b2b;
+        background-color: #f8f9fa;
     }
     
     /* Input fieldy */
     .stTextInput > div > div > input,
     .stTextArea > div > div > textarea {
-        background-color: #2b2b2b;
-        color: white;
-        border-color: #444;
+        background-color: #ffffff;
+        color: black;
+        border-color: #ced4da;
     }
     
     /* Selectboxy */
     .stSelectbox > div > div > select {
-        background-color: #FFFFFF;
-        color: white;
-        border-color: #444;
+        background-color: #ffffff;
+        color: black;
+        border-color: #ced4da;
     }
     
     /* Tlačítka */
     .stButton > button {
-        background-color: #2b2b2b;
-        color: white;
-        border-color: #444;
+        background-color: #ffffff;
+        color: black;
+        border-color: #ced4da;
     }
     
     .stButton > button:hover {
-        background-color: #3a3a3a;
-        border-color: #555;
+        background-color: #f8f9fa;
+        border-color: #adb5bd;
     }
 </style>
 """, unsafe_allow_html=True)
-
 # Definováni obrázků pro hráče
 player_images = {
     'niki': "https://i.imgur.com/dQiv8NF.png",
