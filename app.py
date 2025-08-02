@@ -502,16 +502,15 @@ def display_event_section(title_icon, event_name, event_df):
         # Barvení Pořadí
         def color_rank_cell(val):
             return get_color_by_rank(val)
-       styled_df_display = df_display.style \
-    .applymap(color_rank_cell, subset=['Pořadí']) \
-    .format({
-        'Pořadí': lambda x: "{:.0f}".format(x) if pd.notna(x) else '-',  # Přidáno formátování pro "Pořadí"
-        'Skóre': lambda x: "{:,.0f}".format(x).replace(',', ' ') if pd.notna(x) else '-'
-    }, na_rep='-') \
-    .set_table_styles([
-        {'selector': 'thead th', 'props': [('text-align', 'center')]},
-        {'selector': 'tbody td', 'props': [('text-align', 'center')]}
-    ])
+        styled_df_display = df_display.style \
+            .applymap(color_rank_cell, subset=['Pořadí']) \
+            .format({
+                'Skóre': lambda x: "{:,.0f}".format(x).replace(',', ' ') if pd.notna(x) else '-'
+            }, na_rep='-') \
+            .set_table_styles([
+                {'selector': 'thead th', 'props': [('text-align', 'center')]},
+                {'selector': 'tbody td', 'props': [('text-align', 'center')]}
+            ])
         # Skryjte index
         styled_df_display = styled_df_display.hide(axis='index')
         # Zobrazit jako HTML (nutné pro barvení + styling)
