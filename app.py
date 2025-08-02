@@ -1,17 +1,17 @@
 import streamlit as st
-import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
-import math
+import json
 
-
-# Připojení ke Google Sheets
-# Ujistěte se, že soubor 'groovy-design-466106-a2-309c0ced015f.json' je ve stejném adresáři jako app.py
 scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
-credentials = ServiceAccountCredentials.from_json_keyfile_name("groovy-design-466106-a2-309c0ced015f.json", scope)
+
+service_account_info = json.loads(st.secrets["gcp_service_account"])
+credentials = ServiceAccountCredentials.from_json_keyfile_dict(service_account_info, scope)
+
 client = gspread.authorize(credentials)
 sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
 worksheet = sheet.worksheet("výsledky")
+
 
 # Načtení dat
 data = worksheet.get_all_records()
