@@ -87,7 +87,7 @@ td, th {
 /* Ostatní styly pro text */
 td {
     padding: 10px;
-    color: #003366;
+    color: ##B4B4B4;
     text-align: center;
     font-size: 0.95em;
 }
