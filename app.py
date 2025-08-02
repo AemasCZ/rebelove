@@ -20,9 +20,11 @@ credentials = Credentials.from_service_account_info(service_account_info, scopes
 # Autorizace klienta knihovnou gspread
 client = gspread.authorize(credentials)
 
-# Otevření listu podle klíče
-sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
-worksheet = sheet.worksheet("výsledky")
+# Otevření listu podle klíče - VAŠE ID
+sheet = client.open_by_key("1BQoa0hsO-EA3nVrP4AmcXoM7v-vOh4MQhNvGjU2O9LI")
+
+# Výběr worksheetu - změňte "Sheet1" na název vašeho listu
+worksheet = sheet.worksheet("vysledky")
 
 # Načtení dat
 data = worksheet.get_all_records()
