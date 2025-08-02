@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import gspread
 from oauth2client.service_account import ServiceAccountCredentials
 import json
@@ -12,15 +13,15 @@ client = gspread.authorize(credentials)
 sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
 worksheet = sheet.worksheet("výsledky")
 
-
 # Načtení dat
 data = worksheet.get_all_records()
 df = pd.DataFrame(data)
 
-# Odstraní první sloupec, pokud vypadá jako index (číslo nebo "Unnamed")
+# Odstraní první sloupec, pokud vypadá jako index
 first_col = df.columns[0]
 if first_col == '' or 'Unnamed' in first_col or df[first_col].apply(lambda x: isinstance(x, int)).all():
     df = df.drop(columns=[first_col])
+
 
 
 # Čištění a typy dat
