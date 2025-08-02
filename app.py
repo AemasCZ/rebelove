@@ -12,7 +12,7 @@ scope = [
 ]
 
 # Získání informací o službě z tajných dat ve Streamlitu
-service_account_info = json.loads(st.secrets["gcp_service_account"])
+service_account_info = dict(st.secrets["gcp_service_account"])
 
 # Vytvoření přihlašovacích údajů pomocí Google Credentials z knihovny google-auth
 credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
