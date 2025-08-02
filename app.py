@@ -489,6 +489,8 @@ def normalize_name(name):
 
 
 # Funkce pro zobrazení detailů konkrétního typu eventu (např. Truhly nebo Hrady/Bomby)
+# Najděte tuto funkci v kódu a nahraďte ji:
+
 def display_event_section(title_icon, event_name, event_df):
     st.subheader(f"{title_icon} {event_name}")
     if not event_df.empty:
@@ -499,13 +501,18 @@ def display_event_section(title_icon, event_name, event_df):
         # ✅ Změna: pouze datum bez času
         df_display['Datum'] = pd.to_datetime(df_display['Datum'], errors='coerce')
         df_display['Datum'] = df_display['Datum'].dt.strftime('%d.%m.%Y')
+        
+        # ✅ NOVÁ ZMĚNA: Převedeme pořadí na celé číslo
+        df_display['Pořadí'] = df_display['Pořadí'].astype('Int64')  # Int64 umožňuje NaN hodnoty
+        
         # Barvení Pořadí
         def color_rank_cell(val):
             return get_color_by_rank(val)
         styled_df_display = df_display.style \
             .applymap(color_rank_cell, subset=['Pořadí']) \
             .format({
-                'Skóre': lambda x: "{:,.0f}".format(x).replace(',', ' ') if pd.notna(x) else '-'
+                'Skóre': lambda x: "{:,.0f}".format(x).replace(',', ' ') if pd.notna(x) else '-',
+                'Pořadí': lambda x: str(int(x)) if pd.notna(x) else '-'  # ✅ NOVÁ ZMĚNA: Formátování pořadí jako celé číslo
             }, na_rep='-') \
             .set_table_styles([
                 {'selector': 'thead th', 'props': [('text-align', 'center')]},
