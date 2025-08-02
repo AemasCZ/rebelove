@@ -143,7 +143,7 @@ st.markdown("""
     
     /* Selectboxy */
     .stSelectbox > div > div > select {
-        background-color: #2b2b2b;
+        background-color: #FFFFFF;
         color: white;
         border-color: #444;
     }
