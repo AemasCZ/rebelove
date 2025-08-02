@@ -24,7 +24,7 @@ client = gspread.authorize(credentials)
 sheet = client.open_by_key("1BQoa0hsO-EA3nVrP4AmcXoM7v-vOh4MQhNvGjU2O9LI")
 
 # Výběr worksheetu - změňte "Sheet1" na název vašeho listu
-worksheet = sheet.worksheet("vysledky")
+worksheet = sheet.worksheet("výsledky")
 
 # Načtení dat
 data = worksheet.get_all_records()
