@@ -5,8 +5,11 @@ from google.oauth2.service_account import Credentials
 import json
 import math
 
-# Nastavení přístupového rozsahu
-scope = ["https://spreadsheets.google.com/feeds", "https://www.googleapis.com/auth/drive"]
+# Nastavení přístupového rozsahu pro Google Sheets API
+scope = [
+    "https://spreadsheets.google.com/feeds",
+    "https://www.googleapis.com/auth/drive"
+]
 
 # Získání informací o službě z tajných dat ve Streamlitu
 service_account_info = json.loads(st.secrets["gcp_service_account"])
@@ -21,6 +24,11 @@ client = gspread.authorize(credentials)
 sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
 worksheet = sheet.worksheet("výsledky")
 
+# Načtení dat
+data = worksheet.get_all_records()
+
+# Převod dat do Pandas DataFrame
+df = pd.DataFrame(data)
 # Načtení dat
 data = worksheet.get_all_records()
 
