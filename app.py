@@ -55,59 +55,110 @@ df['Skóre'] = (
     .astype(float)
 )
 
-# Styl pro Streamlit HTML tabulku
+# Kompletní tmavý styl pro Streamlit aplikaci
 st.markdown("""
-    <style>
-    /* Obecné styly pro tělo a font */
+<style>
+    /* Hlavní aplikace - tmavé pozadí pro všechny */
+    .stApp {
+        background-color: #1e1e1e !important;
+        color: white !important;
+        font-family: 'Segoe UI', sans-serif;
+    }
+    
+    /* Hlavní obsah */
+    .main .block-container {
+        background-color: #1e1e1e !important;
+        color: white !important;
+    }
+    
+    /* Sidebar */
+    .sidebar .sidebar-content {
+        background-color: #2b2b2b !important;
+        color: white !important;
+    }
+    
+    /* Obecné styly pro tělo */
     body {
         background-color: #1e1e1e;
         color: white;
         font-family: 'Segoe UI', sans-serif;
     }
-    /* Styly pro samotnou tabulku */
-    <style>
-table {
-    background-color: #2b2b2b;
-    border-collapse: collapse;
-    width: auto;
-    max-width: 100%;
-    border-radius: 10px;
-    overflow-x: auto;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-}
-
-/* Zakáže zalamování textu ve všech buňkách a hlavičkách */
-td, th {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    vertical-align: middle;
-}
-
-/* Ostatní styly pro text */
-td {
-    padding: 10px;
-    color: #4FC3F7;
-    text-align: center;
-    font-size: 0.95em;
-}
-
-th {
-    background-color: #444;
-    color: #ffcc00;
-    padding: 10px;
-    text-align: center;
-    font-size: 1em;
-}
-
-frame th:nth-child(9),
-.dataframe th:nth-child(10),
-.dataframe th:nth-child(11) {
-    background-color: #3a3a3a !important;
+    
+    /* Styly pro HTML tabulky */
+    table {
+        background-color: #2b2b2b;
+        border-collapse: collapse;
+        width: auto;
+        max-width: 100%;
+        border-radius: 10px;
+        overflow-x: auto;
+        box-shadow: 0 0 10px rgba(0,0,0,0.4);
     }
     
+    /* Zakáže zalamování textu ve všech buňkách a hlavičkách */
+    td, th {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+    }
+    
+    /* Styly pro buňky */
+    td {
+        padding: 10px;
+        color: #4FC3F7;
+        text-align: center;
+        font-size: 0.95em;
+    }
+    
+    /* Styly pro hlavičky */
+    th {
+        background-color: #444;
+        color: #ffcc00;
+        padding: 10px;
+        text-align: center;
+        font-size: 1em;
+    }
+    
+    /* Speciální styly pro konkrétní sloupce */
+    .dataframe th:nth-child(9),
+    .dataframe th:nth-child(10),
+    .dataframe th:nth-child(11) {
+        background-color: #3a3a3a !important;
+    }
+    
+    /* Streamlit dataframe styly */
+    .stDataFrame {
+        background-color: #2b2b2b;
+    }
+    
+    /* Input fieldy */
+    .stTextInput > div > div > input,
+    .stTextArea > div > div > textarea {
+        background-color: #2b2b2b;
+        color: white;
+        border-color: #444;
+    }
+    
+    /* Selectboxy */
+    .stSelectbox > div > div > select {
+        background-color: #2b2b2b;
+        color: white;
+        border-color: #444;
+    }
+    
+    /* Tlačítka */
+    .stButton > button {
+        background-color: #2b2b2b;
+        color: white;
+        border-color: #444;
+    }
+    
+    .stButton > button:hover {
+        background-color: #3a3a3a;
+        border-color: #555;
+    }
 </style>
-
 """, unsafe_allow_html=True)
 
 # Definováni obrázků pro hráče
