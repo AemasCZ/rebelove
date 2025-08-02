@@ -59,28 +59,28 @@ df['Skóre'] = (
 # Kompletní styl pro Streamlit aplikaci s černým textem
 st.markdown("""
 <style>
-    /* Hlavní aplikace - bílé pozadí pro všechny */
+    /* Hlavní aplikace - světle šedé pozadí pro všechny */
     .stApp {
-        background-color: #ffffff !important;
+        background-color: #e0e0e0 !important;
         color: black !important;
         font-family: 'Segoe UI', sans-serif;
     }
     
     /* Hlavní obsah */
     .main .block-container {
-        background-color: #ffffff !important;
+        background-color: #e0e0e0 !important;
         color: black !important;
     }
     
     /* Sidebar */
     .sidebar .sidebar-content {
-        background-color: #f5f5f5 !important;
+        background-color: #d8d8d8 !important;
         color: black !important;
     }
     
     /* Obecné styly pro tělo */
     body {
-        background-color: #ffffff;
+        background-color: #e0e0e0;
         color: black;
         font-family: 'Segoe UI', sans-serif;
     }
