@@ -55,6 +55,7 @@ df['Skóre'] = (
     .astype(float)
 )
 
+
 # Kompletní styl pro Streamlit aplikaci s černým textem
 st.markdown("""
 <style>
@@ -159,11 +160,31 @@ st.markdown("""
         border-color: #ced4da;
     }
     
-    /* Selectboxy */
+    /* Selectboxy - kompletní přepsání */
     .stSelectbox > div > div > select {
-        background-color: #ffffff;
-        color: black;
-        border-color: #ced4da;
+        background-color: #ffffff !important;
+        color: black !important;
+        border-color: #ced4da !important;
+    }
+    
+    /* Selectbox dropdown options */
+    .stSelectbox option {
+        background-color: #ffffff !important;
+        color: black !important;
+    }
+    
+    /* Selectbox při hover */
+    .stSelectbox > div > div > select:hover {
+        background-color: #f8f9fa !important;
+        border-color: #adb5bd !important;
+    }
+    
+    /* Selectbox při focus */
+    .stSelectbox > div > div > select:focus {
+        background-color: #ffffff !important;
+        color: black !important;
+        border-color: #007bff !important;
+        box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25) !important;
     }
     
     /* Tlačítka */
