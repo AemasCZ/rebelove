@@ -248,7 +248,7 @@ st.markdown("""
 # Definováni obrázků pro hráče
 player_images = {
     'niki': "https://i.imgur.com/dQiv8NF.png",
-    'janulík': "https://i.imgur.com/x2gGMZK.jpeg",
+    'janulik': "https://i.imgur.com/x2gGMZK.jpeg",
     'λουση': "https://i.imgur.com/q490sNO.jpeg", # Ponechávám řecké písmeno
     'michal.': "https://i.imgur.com/3u7rLQN.jpeg",
     'jiří': "https://i.imgur.com/MXkcviA.png",
