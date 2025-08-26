@@ -258,7 +258,6 @@ player_images = {
     'pája': "https://i.imgur.com/Wzwaq6d.png",
       'adéla': "https://i.imgur.com/BRc0l9N.png",
         'alexandr': "https://i.imgur.com/LLXk5zW.png",
-        'aleš': "https://i.imgur.com/5UKLiuS.png",
     'bobeš cumel': "https://i.imgur.com/qjHHaw2.png",
      'daniel': "https://i.imgur.com/ntvS6G8.jpeg",
     'denisa': "https://i.imgur.com/DLRP9PV.jpeg",
