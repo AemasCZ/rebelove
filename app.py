@@ -252,7 +252,6 @@ player_images = {
     'λουση': "https://i.imgur.com/q490sNO.jpeg", # Ponechávám řecké písmeno
     'michal.': "https://i.imgur.com/3u7rLQN.jpeg",
     'jiří': "https://i.imgur.com/MXkcviA.png",
-    'míša': "https://i.imgur.com/c8oqSH8.png",
     'anežka': "https://i.imgur.com/zgqqufy.png",
     'péťa': "https://i.imgur.com/MEFEJ7N.png",
     'pája': "https://i.imgur.com/Wzwaq6d.png",
@@ -294,7 +293,7 @@ player_images = {
     'evča': "https://i.imgur.com/uoJFsEE.png",
      'misha': "https://i.imgur.com/a3Kanxx.png",
     'міша': "https://i.imgur.com/QpbAMvx.jpeg",
-    'míša.': "https://i.imgur.com/t5C6b8E.jpeg",
+    'míša': "https://i.imgur.com/t5C6b8E.jpeg",
     'olina': "https://i.imgur.com/tJRo609.jpeg",
 }
 
