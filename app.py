@@ -296,6 +296,8 @@ player_images = {
     'míša': "https://i.imgur.com/t5C6b8E.jpeg",
     'olina': "https://i.imgur.com/tJRo609.jpeg",
      'žanet': "https://i.imgur.com/AwJm34d.jpeg",
+     'lenka': "https://i.imgur.com/DXeR3UY.jpeg",
+     'jakub': "https://i.imgur.com/KZF9Xjt.jpeg",
 }
 
 # Výpočet dat pro tabulku
