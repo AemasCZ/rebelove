@@ -286,18 +286,17 @@ player_images = {
     'rysnerova': "https://i.imgur.com/UNL0TLd.png",
     'stanislav': "https://i.imgur.com/JQ7Aver.png",
      'terez': "https://i.imgur.com/54Slb4J.png",
-     'tomas': "https://i.imgur.com/fod41qm.png",
     'veronika': "https://i.imgur.com/4J9AKEO.png",
     'zuzanka': "https://i.imgur.com/8dnuwQM.png",
     'pavla': "https://i.imgur.com/VC72RkP.png",
     'evča': "https://i.imgur.com/uoJFsEE.png",
-     'misha': "https://i.imgur.com/a3Kanxx.png",
     'міша': "https://i.imgur.com/QpbAMvx.jpeg",
     'míša': "https://i.imgur.com/t5C6b8E.jpeg",
     'olina': "https://i.imgur.com/tJRo609.jpeg",
      'žanet': "https://i.imgur.com/AwJm34d.jpeg",
      'lenka': "https://i.imgur.com/DXeR3UY.jpeg",
      'jakub': "https://i.imgur.com/KZF9Xjt.jpeg",
+     'patrik': "https://imgur.com/a/iGs7DO6",
 }
 
 # Výpočet dat pro tabulku
