@@ -1,0 +1,318 @@
+/* =========================
+   DESIGN TOKENS (doladíš-li pozice, uprav jen tyto hodnoty)
+   ========================= */
+:root{
+  --page-pad: 24px;        /* padding stránky */
+  --logo-left: 40px;       /* NOVĚ: kolik px od levého okraje bude blok s logem */
+  --logao-width: 300px;     /* zvětšení loga ~10 % (původně ~270px) */
+  --logo-gap: 40px;        /* mezera mezi logem a donut zónou – stejná jako okraj vlevo */
+
+  --bg: #0c1424;
+  --bg-grad-1:#0c1424;
+  --bg-grad-2:#0d1b2f;
+
+  --panel:#13243c;           /* karty (donuty) */
+  --panel-border:#1c2f50;
+
+  --card:#0f1c33;            /* sekce (tabulky) */
+  --card-border:#1a2d4e;
+
+  --table-head:#0d213f;
+  --thead-text:#cfe1ff;
+  --table-row:#f6f9ff;
+  --table-row-alt:#eef4ff;
+  --table-row-hover:#e6eefe;
+  --table-border:#dfe6f5;
+
+  --text:#f0f3f7;
+  --text-dim:#c0c8d4;
+  --accent:#7aa8ff;
+
+  --chip:#0e1830;
+  --chip-selected:#21335a;
+  --chip-border:#3b5fb5;
+
+  /* Podmíněné barvy */
+  --good:#0436c0dc;            /* 70–100 % */
+  --warn:#029102ea;            /* 30–69 % – žlutější, čitelná na světlém řádku */
+  --bad:#d32020;               /* 1–29 %  */
+  --zero:#630c0c;              /* 0 %     */
+
+  --donut-track: rgba(0,0,0,.82);
+}
+
+/* =========================
+   Base
+   ========================= */
+*{ box-sizing: border-box; }
+html,body{ height:100%; }
+body{
+  margin:0;
+  color:var(--text);
+  background:
+    radial-gradient(1200px 600px at 65% -50%, #17355f33 0%, transparent 60%),
+    linear-gradient(180deg, var(--bg-grad-1), var(--bg-grad-2) 35%, var(--bg));
+  font: 15px/1.5 Inter, system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+}
+
+/* =========================
+   Header / LOGO + DONUTS
+   ========================= */
+header{
+  position: relative;
+  padding: 14px var(--page-pad) 6px;
+}
+header > h1{ display:none; }
+
+/* LOGO BLOK – vlevo, text na střed šířky loga */
+.logo-stack{
+  position: absolute;
+  left: var(--logo-left);   /* dříve: var(--page-pad) */
+  top: var(--logo-top, 22px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 4px;                 /* bylo 6–10px → text blíž k logu */
+}
+
+.guild-logo{
+  width: var(--logo-width);
+  height: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+}
+
+.logo-caption{ line-height: 1.1; }
+.logo-title{
+  margin: 0;
+  font-weight: 900;
+  font-size: 34px;
+  letter-spacing: .6px;
+  color: #e8f2ff;
+}
+.logo-subtitle{
+  margin: 0;               /* žádné extra odsazení */
+  font-weight: 700;
+  font-size: 12px;         /* bylo 15px → ~-20 % */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #9fb7d9;
+  opacity: .95;
+}
+
+/* DONUT ZÓNA – vždy symetricky uprostřed (žádná kompenzace za logo) */
+.header-row{ display:block; }
+.guild-stats{
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(300px, 360px)) !important;
+  gap: 20px !important;
+  justify-content: center !important; /* donuty zůstanou uprostřed stránky */
+  padding-left: var(--page-pad);       /* stejné odsazení zleva i zprava */
+  padding-right: var(--page-pad);
+  margin: 0 auto;
+}
+
+/* Donut karty */
+.stat-card{
+  background:var(--panel);
+  border:1px solid var(--panel-border);
+  border-radius:14px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.28);
+  padding:12px 14px 14px;
+  display:grid;
+  grid-template-rows:auto 1fr; /* titulek + graf */
+  min-height:160px;
+}
+.stat-card h3{
+  margin:6px 6px 0;
+  color:#d8e6ff;
+  font-size:14px;
+  letter-spacing:.3px;
+  font-weight:800;
+  opacity:.95;
+  justify-self:start;
+}
+
+/* DONUT: čtvercový box → vždy kruh */
+.stat-card .chart-placeholder{
+  width:168px !important;
+  height:168px !important;
+  aspect-ratio:1 / 1;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  margin:2px auto 0 !important;
+}
+.stat-card .chart-placeholder canvas{
+  width:auto !important;
+  height:auto !important;
+  display:block;
+}
+
+/* =========================
+   Chips (multi select)
+   ========================= */
+.multi-siege-bar{
+  display:flex; flex-wrap:wrap; gap:8px;
+  padding:10px 0 8px;
+  margin:6px 0 10px;
+  justify-content:center;
+}
+.seg-chip{
+  background:var(--chip);
+  color:var(--text);
+  border:1px solid #203253;
+  border-radius:999px;
+  padding:7px 12px;
+  font-size:12.5px; font-weight:800; letter-spacing:.25px;
+  cursor:pointer; user-select:none;
+  transition: transform .05s ease, background .15s ease, border-color .15s ease, box-shadow .15s ease;
+}
+.seg-chip:hover{ transform: translateY(-1px); }
+.seg-chip.selected{
+  background:var(--chip-selected);
+  border-color:var(--chip-border);
+  box-shadow: inset 0 0 0 1px rgba(121,168,255,.25);
+}
+.seg-chip.action{
+  background:#0c1630;
+  border-style:dashed;
+  font-weight:900;
+}
+.seg-chip .chip-date{ margin-left:6px; opacity:.75; font-weight:600; }
+
+/* =========================
+   Sekce / karty (tabulky)
+   ========================= */
+main{
+  padding: 0 var(--page-pad) 24px;
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:20px;
+}
+section{
+  background:var(--card);
+  border:1px solid var(--card-border);
+  border-radius:12px;
+  box-shadow: 0 6px 20px rgba(0,0,0,.26);
+  padding:12px;
+}
+section h2{
+  color:#d8e6ff;
+  font-size:18px;
+  font-weight:900;
+  letter-spacing:.3px;
+  margin:2px 4px 10px;
+}
+
+/* =========================
+   Tabulky
+   ========================= */
+table{ width:100%; border-collapse:collapse; border-radius:10px; overflow:hidden; }
+th, td{
+  padding:12px 14px;
+  border-bottom:1px solid var(--table-border);
+  text-align:center;
+}
+
+/* Hlavičky – sjednocená barva (včetně „Nickname“) */
+thead th{
+  background:var(--table-head);
+  color:var(--thead-text);
+  font-weight:800;
+  position:sticky;
+  top:0;
+  z-index:2;
+  cursor:pointer; /* klik pro řazení */
+}
+
+/* Hodnoty – tučné 700 */
+tbody tr:nth-child(odd){ background:var(--table-row); }
+tbody tr:nth-child(even){ background:var(--table-row-alt); }
+tbody tr:hover{ background:var(--table-row-hover); }
+
+tbody td{
+  color:#081734;
+  font-weight:700;
+}
+
+/* Jména vlevo v těle */
+tbody td:first-child{ text-align:left; }
+
+/* Podmíněné barvy */
+.val-good{ color: var(--good) !important; }
+.val-warn{ color: var(--warn) !important; }
+.val-bad { color: var(--bad)  !important; }
+.val-zero{ color: var(--zero) !important; }
+
+.chip{
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width:22px; height:22px; padding:0 6px;
+  border-radius:16px; background:#dde7ff; color:#21365e;
+  font-weight:900; font-size:12px;
+}
+
+/* =========================
+   Footer
+   ========================= */
+footer{
+  text-align:center;
+  padding:16px;
+  margin-top:10px;
+  color:var(--text-dim);
+  border-top:1px solid #1a2d4e;
+}
+
+/* =========================
+   Responsivita
+   ========================= */
+@media (min-width: 1400px){
+  /* na velkých displejích můžeš chtít ještě o chlup větší logo */
+  :root{
+    --logo-width: 280px;
+  }
+}
+
+@media (max-width: 1200px){
+  .guild-logo{ width: 220px; }
+  .guild-stats{
+    grid-template-columns: repeat(2, minmax(260px, 360px)) !important;
+  }
+  main{ grid-template-columns: 1fr; }
+}
+
+@media (max-width: 900px){
+  /* Na menších displejích logo už neplave absolutně –
+     složí se nad donuty a vše se centrovaně zarovná. */
+  .logo-stack{
+    position: static;
+    margin: 0 auto 8px;
+    align-items: center;
+    text-align: center;
+  }
+  .guild-logo{ width: 170px; }
+
+  /* paddingy sjednotíme – donuty krásně doprostřed */
+  .guild-stats{
+    padding-left: var(--page-pad);
+    padding-right: var(--page-pad);
+    grid-template-columns: minmax(260px, 360px) !important;
+  }
+}
+
+/* Řádek s výběrem siege na pravé kartě */
+.siege-details .filters{
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 6px 8px;
+}
+
+/* Text „start – end • Rank …“ doprava */
+#siegeDateRange{
+  margin-left: auto;
+  color: var(--text-dim);
+  font-weight: 800;
+  letter-spacing: .2px;
+}

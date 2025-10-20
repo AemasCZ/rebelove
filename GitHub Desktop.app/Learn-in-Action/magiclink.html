@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lean in Action</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #8b5a9f 0%, #c4a3c7 50%, #f5deb3 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 60px 40px;
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(139, 90, 159, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #8b5a9f, #6b5b95);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 16px;
+            letter-spacing: -0.02em;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #6b5b95;
+            margin-bottom: 48px;
+            opacity: 0.8;
+        }
+
+        .email-form {
+            margin-bottom: 24px;
+        }
+
+        .email-input {
+            width: 100%;
+            padding: 18px 24px;
+            border: 2px solid #e5e7eb;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            background: white;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .email-input:focus {
+            outline: none;
+            border-color: #c4a3c7;
+            box-shadow: 0 0 0 4px rgba(196, 163, 199, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 18px 24px;
+            background: linear-gradient(135deg, #8b5a9f, #6b5b95);
+            color: white;
+            border: none;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(139, 90, 159, 0.3);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .info-text {
+            font-size: 0.95rem;
+            color: #6b5b95;
+            opacity: 0.7;
+            line-height: 1.5;
+        }
+
+        .magic-link-icon {
+            display: inline-block;
+            margin-left: 4px;
+            animation: sparkle 2s ease-in-out infinite;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.7; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 40px 24px;
+            }
+            
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Floating elements for visual interest */
+        .floating-element {
+            position: absolute;
+            opacity: 0.1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            top: 70%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            bottom: 20%;
+            left: 20%;
+            animation-delay: 4s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating decorative elements -->
+    <div class="floating-element" style="width: 60px; height: 60px; background: linear-gradient(135deg, #8b5a9f, #c4a3c7); border-radius: 50%;"></div>
+    <div class="floating-element" style="width: 40px; height: 40px; background: linear-gradient(135deg, #c4a3c7, #f5deb3); border-radius: 50%;"></div>
+    <div class="floating-element" style="width: 80px; height: 80px; background: linear-gradient(135deg, #6b5b95, #8b5a9f); border-radius: 50%;"></div>
+
+    <div class="container">
+        <h1>Learn in Action</h1>
+        <p class="subtitle">Budoucnost vzdělávání začíná zde</p>
+        
+        <form class="email-form" id="emailForm">
+            <input 
+                type="email" 
+                class="email-input" 
+                placeholder="Zadejte váš email"
+                required
+                id="emailInput"
+            >
+            <button type="submit" class="submit-btn">
+                Chci se vzdělávat
+            </button>
+        </form>
+        
+        <p class="info-text">
+            Během chvíle obdržíte magic link do emailu<span class="magic-link-icon">✨</span>
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('emailInput').value;
+            const btn = document.querySelector('.submit-btn');
+            
+            // Simple email validation
+            if (email && email.includes('@')) {
+                btn.textContent = 'Odesláno ✓';
+                btn.style.background = 'linear-gradient(135deg, #10b981, #059669)';
+                
+                setTimeout(() => {
+                    btn.textContent = 'Chci se vzdělávat';
+                    btn.style.background = 'linear-gradient(135deg, #8b5a9f, #6b5b95)';
+                    document.getElementById('emailInput').value = '';
+                }, 3000);
+            }
+        });
+
+        // Add subtle hover effects to container
+        const container = document.querySelector('.container');
+        container.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-5px)';
+        });
+        
+        container.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    </script>
+</body>
+</html>
