@@ -297,7 +297,7 @@ player_images = {
      'jakub': "https://i.imgur.com/KZF9Xjt.jpeg",
      'paťas': "https://i.imgur.com/0e6W2zA.jpeg",
      'natálie': "https://i.imgur.com/jzMKkFL.jpeg",
-      'josefa': "https://i.imgur.com/0e6W2zA.jpeg",
+      
       
 }
 
