@@ -281,8 +281,7 @@ player_images = {
     'petr.': "https://i.imgur.com/26XtOmP.jpeg",
     'petr..': "https://i.imgur.com/A8Lgia3.jpeg",
      'radek': "https://i.imgur.com/QCWxEBh.png",
-    'renáta.': "https://i.imgur.com/stD6IGc.png",
-    'renáta': "https://i.imgur.com/usucPJt.jpeg",
+    'renáta': "https://i.imgur.com/stD6IGc.png",
     'rysnerova': "https://i.imgur.com/UNL0TLd.png",
     'stanislav': "https://i.imgur.com/JQ7Aver.png",
      'terez': "https://i.imgur.com/54Slb4J.png",
@@ -298,6 +297,7 @@ player_images = {
      'jakub': "https://i.imgur.com/KZF9Xjt.jpeg",
      'paťas': "https://i.imgur.com/0e6W2zA.jpeg",
      'natálie': "https://i.imgur.com/jzMKkFL.jpeg",
+      'josefa': "https://i.imgur.com/jzMKkFL.jpeg",
       
 }
 
