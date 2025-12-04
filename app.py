@@ -300,6 +300,7 @@ player_images = {
      'josefa': "https://i.imgur.com/pnDRT7J.png",
      'michaela': "https://i.imgur.com/7DouLnz.png",
      'veronika.': "https://i.imgur.com/KyP4jGx.png",
+     'radek.': "https://i.imgur.com/s4a0gSi.png",
       
       
 }
