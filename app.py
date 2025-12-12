@@ -308,6 +308,18 @@ player_images = {
       
 }
 
+def latest_game_is_record(event_df, max_score):
+    """Return True when the most recent game shares the player's top score."""
+    if event_df.empty or pd.isna(max_score):
+        return False
+    latest_entry = event_df.sort_values(by='Datum', ascending=False).head(1)
+    if latest_entry.empty:
+        return False
+    latest_score = latest_entry['Skóre'].iloc[0]
+    if pd.isna(latest_score):
+        return False
+    return math.isclose(float(latest_score), float(max_score), rel_tol=1e-9)
+
 # Výpočet dat pro tabulku
 hraci = df['Hráč'].unique()
 vystup = []
@@ -328,6 +340,7 @@ for hrac in hraci:
     # Osobní rekord pro truhly (ze VŠECH her, ne jen posledních 10)
     truhly_vsechny = d[d['Event'].str.lower() == 'truhla']
     max_truhla = truhly_vsechny['Skóre'].max()
+    truhla_new_record = latest_game_is_record(truhly_vsechny, max_truhla)
 
     # Průměrné pořadí a skóre pro hrady (z posledních 10 her)
     p_hrady = hrady['Pořadí'].mean()
@@ -336,6 +349,7 @@ for hrac in hraci:
     # Osobní rekord pro hrady (ze VŠECH her, ne jen posledních 10)
     hrady_vsechny = d[d['Event'].str.lower() == 'hrady/bomby']
     max_hrady = hrady_vsechny['Skóre'].max()
+    hrady_new_record = latest_game_is_record(hrady_vsechny, max_hrady)
 
     # Vážený průměr pořadí
     vazeny = float('nan')
@@ -346,13 +360,41 @@ for hrac in hraci:
     elif not math.isnan(p_hrady):
         vazeny = p_hrady * 1 
 
-    # Vzhled hráče s obrázkem
+    # Vzhled hráče s obrázkem + badge pro poslední rekord
     hrac_lower = hrac.lower()
+    record_categories = []
+    if truhla_new_record:
+        record_categories.append('Truhla')
+    if hrady_new_record:
+        record_categories.append('Hrady/Bomby')
+    record_badge_html = ''
+    if record_categories:
+        badge_context = ' & '.join(record_categories)
+        record_badge_html = (
+            f'<span style="color: #ffffff; background-color: #c70000; padding: 2px 10px; '
+            f'border-radius: 999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">'
+            f'NEW RECORD ({badge_context})</span>'
+        )
+
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
-        jmeno = f'<div style="display: flex; align-items: center; gap: 10px; min-width: 180px;"><img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;"><span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span></div>'
+        jmeno = (
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 180px; flex-wrap: wrap;">'
+            f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
+            f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'{record_badge_html}'
+            f'</div>'
+        )
     else:
-        jmeno = hrac
+        if record_badge_html:
+            jmeno = (
+                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
+                f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+                f'{record_badge_html}'
+                f'</div>'
+            )
+        else:
+            jmeno = hrac
 
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
     vystup.append({
