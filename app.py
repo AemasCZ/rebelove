@@ -321,7 +321,7 @@ for hrac in hraci:
     if truhly.empty and hrady.empty:
         continue
 
-# Průměrné pořadí a skóre pro truhly (z posledních 10 her)
+    # Průměrné pořadí a skóre pro truhly (z posledních 10 her)
     p_truhla = truhly['Pořadí'].mean()
     s_truhla = truhly['Skóre'].mean()
     
@@ -336,6 +336,26 @@ for hrac in hraci:
     # Osobní rekord pro hrady (ze VŠECH her, ne jen posledních 10)
     hrady_vsechny = d[d['Event'].str.lower() == 'hrady/bomby']
     max_hrady = hrady_vsechny['Skóre'].max()
+
+    # Zjistit, zda byla poslední hra právě new record
+    last_truhla_is_new = False
+    if not truhly_vsechny.empty and pd.notna(max_truhla):
+        last_truhla = truhly_vsechny.sort_values(by='Datum', ascending=False).iloc[0]
+        last_truhla_is_new = pd.notna(last_truhla['Skóre']) and last_truhla['Skóre'] == max_truhla
+
+    last_hrady_is_new = False
+    if not hrady_vsechny.empty and pd.notna(max_hrady):
+        last_hrady = hrady_vsechny.sort_values(by='Datum', ascending=False).iloc[0]
+        last_hrady_is_new = pd.notna(last_hrady['Skóre']) and last_hrady['Skóre'] == max_hrady
+
+    # Formátování maxima + případný červený tag
+    def fmt_score_with_tag(score, is_new):
+        if pd.isna(score):
+            return '-'
+        s = f"{int(score):_}".replace('_', ' ')
+        if is_new:
+            return f'{s} <span style="color:red; font-weight:bold;">NEW RECORD</span>'
+        return s
 
     # Vážený průměr pořadí
     vazeny = float('nan')
@@ -360,10 +380,10 @@ for hrac in hraci:
         '⭐ Vážený průměr': round(vazeny, 2) if not math.isnan(vazeny) else None,
         '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else '-',
         '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else '-',
-        '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else '-',
+        '🏆 Truhla – max. skóre': fmt_score_with_tag(max_truhla, last_truhla_is_new),
         '🔹 Hrady – prům. pořadí': round(p_hrady, 2) if not math.isnan(p_hrady) else '-',
         '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else '-',
-        '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else '-',
+        '🏆 Hrady – max. skóre': fmt_score_with_tag(max_hrady, last_hrady_is_new),
     })
 
 # Vytvoření DataFrame z výstupního seznamu
