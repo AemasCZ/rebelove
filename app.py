@@ -397,15 +397,15 @@ for hrac in hraci:
 
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
     vystup.append({
-        '👤 Hráč': jmeno,
-        '⭐ Vážený průměr': round(vazeny, 2) if not math.isnan(vazeny) else None,
-        '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else '-',
-        '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else '-',
-        '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else '-',
-        '🔹 Hrady – prům. pořadí': round(p_hrady, 2) if not math.isnan(p_hrady) else '-',
-        '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else '-',
-        '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else '-',
-    })
+    '👤 Hráč': jmeno,
+    '⭐ Vážený průměr': round(vazeny, 2) if not math.isnan(vazeny) else None,
+    '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else None,
+    '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else None,
+    '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else None,
+    '🔹 Hrady – prům. pořadí': round(p_hrady, 2) if not math.isnan(p_hrady) else None,
+    '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else None,
+    '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else None,
+})
 
 # Vytvoření DataFrame z výstupního seznamu
 vystup_df = pd.DataFrame(vystup)
