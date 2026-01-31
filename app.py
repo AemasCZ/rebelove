@@ -243,6 +243,18 @@ st.markdown("""
         color: black !important;
     }
 
+    /* Expander - zelený nadpis */
+    div[data-testid="stExpander"] > details > summary {
+        background-color: #2e8b57 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        padding: 10px 14px !important;
+        font-weight: 700 !important;
+    }
+    div[data-testid="stExpander"] > details > summary svg {
+        color: white !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 # Definováni obrázků pro hráče
@@ -633,9 +645,24 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-**Jak se počítá průměrné skóre?**  
-Vezmeme vašich posledních 10 her v Truhlách a 10 posledních her v Hradech/Bombach a tyto čísla sečteme. Truhly protože mají největší prioritu počítáme celé, hrady/bomby jen z jedné třetiny (33%).
+with st.expander("Jak se počítá Vaše skore?"):
+    st.markdown("""
+**Jak se počítá tvoje skóre?**  
+Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.
+
+**Část 1 — Truhly (počítá se naplno, tedy 100 %)**  
+Vezmeš svých poslední 10 her, které jsi hrál v Truhlách. Sečteš všechna skóre z těch 10 her a vydělíš to deseti. To, co vyjde, je tvoj průměr v Truhlách. Tento číslo bereš celé, nic neupravuješ.
+
+**Část 2 — Hrady/Bomby (počítá se jen třetina, tedy 33 %)**  
+Vezmeš svých poslední 10 her, které jsi hrál v Hradech/Bombách. Sečteš všechna skóre z těch 10 her a vydělíš to deseti. To, co vyjde, je tvoj průměr v Hradech. Tento číslo ale vydělíš třemi (neboli vezmeš jen jednu třetinu). Takže pokud by tvůj průměr byl například 900, do výpočtu vstupuje pouze 300.
+
+**Na konec — sečteš obě části**  
+Průměr z Truhel (celý) + průměr z Hradů (jen třetina) = tvoje celkové skóre.
+
+**Příklad:**  
+Průměr v Truhlách = 1 000 → bereš 1 000  
+Průměr v Hradech = 900 → bereš jen třetinu → 300  
+Celkové skóre = 1 000 + 300 = 1 300
 """)
 
 st.markdown("---")
