@@ -676,13 +676,14 @@ Celkové skóre = 1 000 + 300 = 1 300
 
 with st.expander("Proč je Truhla důležitější než Hrady/Bomby?"):
     st.markdown("""
-Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme lize máme určené odměny v Hradech a Bombách.
+Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme lize, máme určené odměny v Hradech a Bombách.
 
-Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 50-75 tisíc za splnění celého hradu, pokud by jsme ale hráli nejnižší ligu, dostaneme jen např. 1000 spinů za splnění celého hradu a jednotlivé odměny budou také malé (místo 7k spinů třeba jen 500 spinů atd.)
+Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 50-75 tisíc za splnění celého hradu, pokud by jsme ale hráli nejnižší ligu, dostaneme jen např. 1000 spinů za splnění celého hradu a jednotlivé odměny budou také malé (místo 7000 spinů třeba jen 500 spinů atd.)
 
 Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby jsou velmi praktické k získání zásob.
 """)
 
+st.markdown('<div class="danger-expander">', unsafe_allow_html=True)
 with st.expander("Kdy jsem v ohrožení?"):
     st.markdown("""
 Abys byl 100% v bezpečí, musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre vedle tvého jména). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
@@ -690,6 +691,14 @@ Abys byl 100% v bezpečí, musíš mít nahráno minimálně 200 000 bodů (v pr
 Pokud máš méně, neznamená to, že hned končíš, ale zamysli se, jak bys mohl zlepšit svoje výkony. Protože pokud bysme mohli získat nějakého velmi silného hráče a nebude v klanu místo, tvoje pozice může být ohrožena.
 
 Stále platí, že prioritou je pro nás týmovost a slušné chování :)
+""")
+st.markdown('</div>', unsafe_allow_html=True)
+
+with st.expander("Proč mám u jména NOVÁČEK?"):
+    st.markdown("""
+Pokud jsi u nás nový a nemáš ještě odehraných alespoň 5 her v Truhle a 5 her v Hradech/Bombách, bereme na tebe speciální ohledy a za tvým jménem, bude po tuto dobu napsáno "NOVÁČEK".
+
+Přechod do nového klanu může být náročný, takže Ti chceme dát dostatek času na aklimatizaci a přizpůsobení se :)
 """)
 
 st.markdown("---")
