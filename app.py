@@ -255,7 +255,7 @@ st.markdown("""
         color: white !important;
     }
     .expander-wrap {
-        margin-bottom: 10px !important;
+        margin-bottom: 4px !important;
     }
     .expander-wrap div[data-testid="stExpander"] {
         margin-bottom: 0 !important;
