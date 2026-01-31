@@ -244,12 +244,17 @@ st.markdown("""
     }
 
     /* Expander - zelený nadpis */
+    div[data-testid="stExpander"] > details {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
     div[data-testid="stExpander"] > details > summary {
         background-color: #2e8b57 !important;
         color: white !important;
         border-radius: 8px !important;
-        padding: 10px 14px !important;
+        padding: 8px 14px !important;
         font-weight: 700 !important;
+        margin: 0 !important;
     }
     div[data-testid="stExpander"] > details > summary svg {
         color: white !important;
@@ -263,6 +268,12 @@ st.markdown("""
     }
     .expander-wrap + .expander-wrap {
         margin-top: 2px !important;
+    }
+    div[data-testid="stExpander"] {
+        margin: 0 !important;
+    }
+    div[data-testid="stVerticalBlock"] > div:has(> div[data-testid="stExpander"]) {
+        margin-bottom: 2px !important;
     }
     /* Červený expander */
     .danger-expander div[data-testid="stExpander"] > details > summary {
