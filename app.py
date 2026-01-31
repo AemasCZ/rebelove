@@ -400,10 +400,8 @@ for hrac in hraci:
     vystup.append({
     '👤 Hráč': jmeno,
     '⭐ Vážený průměr': round(vazeny) if not math.isnan(vazeny) else None,
-    '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else None,
     '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else None,
     '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else None,
-    '🔹 Hrady – prům. pořadí': round(p_hrady, 2) if not math.isnan(p_hrady) else None,
     '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else None,
     '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else None,
 })
@@ -448,14 +446,12 @@ vystup_df.columns = pd.MultiIndex.from_tuples([
     (' ', ' '), # První oddělovací sloupec - prázdný znak
     
     # Skupina "Truhla"
-    ('Truhla', '⌀ pořadí'),
     ('Truhla', '⌀ body'),
     ('Truhla', 'Osobní rekord'),
     
     ('  ', '  '), # Druhý oddělovací sloupec - dva prázdné znaky
     
     # Skupina "Hrady/Bomby"
-    ('Hrady/Bomby', '⌀ pořadí'),
     ('Hrady/Bomby', '⌀ body'),
     ('Hrady/Bomby', 'Osobní rekord'),
 ])
@@ -518,10 +514,8 @@ format_score = lambda x: f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
 
 styled_df = styled_df.format({
     ('Rebelové', '⌀ skóre'): format_score, # Vážené průměrné skóre - celé číslo s mezerami
-    ('Truhla', '⌀ pořadí'): '{:.2f}',    # Průměrné pořadí Truhly - 2 desetinná místa
     ('Truhla', '⌀ body'): format_score,  # Průměrné skóre Truhly - formát s mezerami
     ('Truhla', 'Osobní rekord'): format_score, # Osobní rekord Truhly - formát s mezerami
-    ('Hrady/Bomby', '⌀ pořadí'): '{:.2f}', # Průměrné pořadí Hradů/Bomb - 2 desetinná místa
     ('Hrady/Bomby', '⌀ body'): format_score,  # Průměrné skóre Hradů/Bomb - formát s mezerami
     ('Hrady/Bomby', 'Osobní rekord'): format_score, # Osobní rekord Hradů/Bomb - formát s mezerami
 })
@@ -561,9 +555,9 @@ styled_df = styled_df.set_table_styles([
                ('text-indent', '-9999px !important'), ('overflow', 'hidden !important'),
                ('white-space', 'nowrap !important')]},
 
-    # Styly pro DRUHÝ ČERNÝ SLOUPEC (8. vizuální sloupec)
+    # Styly pro DRUHÝ ČERNÝ SLOUPEC (7. vizuální sloupec)
     # Kompletně černý sloupec bez jakéhokoliv textu
-    {'selector': '.dataframe th:nth-child(8), .dataframe td:nth-child(8)',
+    {'selector': '.dataframe th:nth-child(7), .dataframe td:nth-child(7)',
      'props': [('width', '20px !important'), ('min-width', '20px !important'), ('max-width', '20px !important'),
                ('background-color', 'black !important'),
                ('color', 'black !important'), ('font-size', '0 !important'),
