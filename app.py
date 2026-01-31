@@ -353,14 +353,14 @@ for hrac in hraci:
     max_hrady = hrady_vsechny['Skóre'].max()
     hrady_new_record = latest_game_is_record(hrady_vsechny, max_hrady)
 
-    # Vážený průměr pořadí
+    # Vážený průměr skóre (Truhly váha 1, Hrady/Bomby váha 0.33)
     vazeny = float('nan')
-    if not math.isnan(p_truhla) and not math.isnan(p_hrady):
-        vazeny = (p_truhla * 1 + p_hrady * 0.5) / 1.5
-    elif not math.isnan(p_truhla):
-        vazeny = p_truhla
-    elif not math.isnan(p_hrady):
-        vazeny = p_hrady * 1 
+    if not math.isnan(s_truhla) and not math.isnan(s_hrady):
+        vazeny = (s_truhla * 1 + s_hrady * 0.33) / 1.33
+    elif not math.isnan(s_truhla):
+        vazeny = s_truhla
+    elif not math.isnan(s_hrady):
+        vazeny = s_hrady
 
     # Vzhled hráče s obrázkem + badge pro poslední rekord
     hrac_lower = hrac.lower()
@@ -420,16 +420,16 @@ vystup_df.insert(0, 'Pořadí', range(1, len(vystup_df) + 1))
 # Přejmenování sloupců pro MultiIndex
 # Používáme zde spíše finální názvy pro MultiIndex
 vystup_df.rename(columns={
-    '⭐ Vážený průměr': '⌀ pořadí', # Stále stejný název pro usnadnění
+    '⭐ Vážený průměr': '⌀ skóre', # Vážené průměrné skóre
     '👤 Hráč': 'Hráč' # Stále stejný název pro usnadnění
 }, inplace=True)
 
 # Zaokrouhlení na 2 desetinná místa v rámci dat DataFrame
-vystup_df['⌀ pořadí'] = vystup_df['⌀ pořadí'].round(2)
+vystup_df['⌀ skóre'] = vystup_df['⌀ skóre'].round(2)
 
 # Vložení separátorů jako obyčejných sloupců s unikátními názvy
 vystup_df.insert(
-    vystup_df.columns.get_loc('⌀ pořadí') + 1, 
+    vystup_df.columns.get_loc('⌀ skóre') + 1, 
     '__SEP1__', 
     ''
 )
@@ -445,7 +445,7 @@ vystup_df.columns = pd.MultiIndex.from_tuples([
     # Skupina "Rebelové"
     ('Rebelové', 'Pořadí'),
     ('Rebelové', 'Hráč'),
-    ('Rebelové', '⌀ pořadí'),
+    ('Rebelové', '⌀ skóre'),
     
     (' ', ' '), # První oddělovací sloupec - prázdný znak
     
@@ -498,7 +498,7 @@ def apply_row_styles(row):
         styles[('Rebelové', 'Pořadí')] = base_style
 
     # '⌀ pořadí' necháme bez pozadí, jen tučné
-    styles[('Rebelové', '⌀ pořadí')] = styles.get(('Rebelové', '⌀ pořadí'), '') + ' font-weight: bold;'
+    styles[('Rebelové', '⌀ skóre')] = styles.get(('Rebelové', '⌀ skóre'), '') + ' font-weight: bold;'
 
     # Stylování černých separátorů
     styles[(' ', ' ')] = 'background-color: black;'
@@ -519,7 +519,7 @@ styled_df = styled_df.apply(apply_row_styles, axis=1)
 format_score = lambda x: f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
 
 styled_df = styled_df.format({
-    ('Rebelové', '⌀ pořadí'): '{:.2f}', # Vážený průměr - 2 desetinná místa
+    ('Rebelové', '⌀ skóre'): '{:.2f}', # Vážené průměrné skóre - 2 desetinná místa
     ('Truhla', '⌀ pořadí'): '{:.2f}',    # Průměrné pořadí Truhly - 2 desetinná místa
     ('Truhla', '⌀ body'): format_score,  # Průměrné skóre Truhly - formát s mezerami
     ('Truhla', 'Osobní rekord'): format_score, # Osobní rekord Truhly - formát s mezerami
