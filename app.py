@@ -255,11 +255,11 @@ st.markdown("""
         color: white !important;
     }
     /* Třetí expander - červený nadpis */
-    div[data-testid="stExpander"]:nth-of-type(3) > details > summary {
-        background-color: #c70000 !important;
+    div[data-testid="stExpander"] + div[data-testid="stExpander"] + div[data-testid="stExpander"] > details > summary {
+        background-color: #e00000 !important;
         color: white !important;
     }
-    div[data-testid="stExpander"]:nth-of-type(3) > details > summary svg {
+    div[data-testid="stExpander"] + div[data-testid="stExpander"] + div[data-testid="stExpander"] > details > summary svg {
         color: white !important;
     }
 
