@@ -384,8 +384,8 @@ for hrac in hraci:
         badge_context = ' & '.join(record_categories)
         record_badge_html = (
             f'<span style="color: #ffffff; background-color: #c70000; padding: 2px 10px; '
-            f'border-radius: 999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">'
-            f'NEW RECORD ({badge_context})</span>'
+            f'border-radius: 999px; font-size: 0.72rem; font-weight: 700; white-space: nowrap; '
+            f'align-self: flex-start;">NEW RECORD ({badge_context})</span>'
         )
 
     total_recent_games = len(truhly) + len(hrady)
@@ -404,30 +404,27 @@ for hrac in hraci:
         jmeno = (
             f'<div style="display: flex; align-items: center; gap: 10px; min-width: 360px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
-            f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
-            f'{novice_badge_html}'
-            f'{record_badge_html}'
+            f'<div style="display: flex; flex-direction: column; gap: 4px;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
+            f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'    {novice_badge_html}'
+            f'  </div>'
+            f'  {record_badge_html}'
+            f'</div>'
             f'</div>'
         )
     else:
-        if record_badge_html:
-            jmeno = (
-                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
-                f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
-                f'{novice_badge_html}'
-                f'{record_badge_html}'
-                f'</div>'
-            )
-        else:
-            if novice_badge_html:
-                jmeno = (
-                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
-                    f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
-                    f'{novice_badge_html}'
-                    f'</div>'
-                )
-            else:
-                jmeno = hrac
+        jmeno = (
+            f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
+            f'<div style="display: flex; flex-direction: column; gap: 4px;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
+            f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'    {novice_badge_html}'
+            f'  </div>'
+            f'  {record_badge_html}'
+            f'</div>'
+            f'</div>'
+        )
 
     # Připrav hodnoty osobních rekordů s nenápadným "NEW BEST"
     def format_score_value(val):
