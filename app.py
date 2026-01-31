@@ -401,7 +401,7 @@ for hrac in hraci:
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
     vystup.append({
     '👤 Hráč': jmeno,
-    '⭐ Vážený průměr': round(vazeny, 2) if not math.isnan(vazeny) else None,
+    '⭐ Vážený průměr': round(vazeny) if not math.isnan(vazeny) else None,
     '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else None,
     '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else None,
     '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else None,
@@ -424,8 +424,8 @@ vystup_df.rename(columns={
     '👤 Hráč': 'Hráč' # Stále stejný název pro usnadnění
 }, inplace=True)
 
-# Zaokrouhlení na 2 desetinná místa v rámci dat DataFrame
-vystup_df['⌀ skóre'] = vystup_df['⌀ skóre'].round(2)
+# Zaokrouhlení na celé číslo v rámci dat DataFrame
+vystup_df['⌀ skóre'] = vystup_df['⌀ skóre'].round(0)
 
 # Vložení separátorů jako obyčejných sloupců s unikátními názvy
 vystup_df.insert(
@@ -519,7 +519,7 @@ styled_df = styled_df.apply(apply_row_styles, axis=1)
 format_score = lambda x: f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
 
 styled_df = styled_df.format({
-    ('Rebelové', '⌀ skóre'): '{:.2f}', # Vážené průměrné skóre - 2 desetinná místa
+    ('Rebelové', '⌀ skóre'): format_score, # Vážené průměrné skóre - celé číslo s mezerami
     ('Truhla', '⌀ pořadí'): '{:.2f}',    # Průměrné pořadí Truhly - 2 desetinná místa
     ('Truhla', '⌀ body'): format_score,  # Průměrné skóre Truhly - formát s mezerami
     ('Truhla', 'Osobní rekord'): format_score, # Osobní rekord Truhly - formát s mezerami
