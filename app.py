@@ -648,21 +648,21 @@ st.markdown(f"""
 
 with st.expander("Jak se počítá Vaše skore?"):
     st.markdown("""
-**Jak se počítá tvoje skóre?**  
-Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.
-
-**Část 1 — Truhly (počítá se naplno, tedy 100 %)**  
-Vezmeš svých poslední 10 her, které jsi hrál v Truhlách. Sečteš všechna skóre z těch 10 her a vydělíš to deseti. To, co vyjde, je tvoj průměr v Truhlách. Tento číslo bereš celé, nic neupravuješ.
-
-**Část 2 — Hrady/Bomby (počítá se jen třetina, tedy 33 %)**  
-Vezmeš svých poslední 10 her, které jsi hrál v Hradech/Bombách. Sečteš všechna skóre z těch 10 her a vydělíš to deseti. To, co vyjde, je tvoj průměr v Hradech. Tento číslo ale vydělíš třemi (neboli vezmeš jen jednu třetinu). Takže pokud by tvůj průměr byl například 900, do výpočtu vstupuje pouze 300.
-
-**Na konec — sečteš obě části**  
-Průměr z Truhel (celý) + průměr z Hradů (jen třetina) = tvoje celkové skóre.
-
-**Příklad:**  
-Průměr v Truhlách = 1 000 → bereš 1 000  
-Průměr v Hradech = 900 → bereš jen třetinu → 300  
+Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.  
+**Část 1 — Truhly (počítají se naplno)**  
+Vezmeš svých posledních 10 her v Truhlách.  
+Sečteš skóre ze všech těchto her a výsledek vydělíš deseti.  
+Tím získáš průměr v Truhlách, který se započítává celý, bez jakékoliv úpravy.  
+**Část 2 — Hrady / Bomby (počítá se jen třetina)**  
+Vezmeš svých posledních 10 her v Hradech/Bombách.  
+Opět sečteš všechna skóre a výsledek vydělíš deseti.  
+Získáš průměr v Hradech, ale ten se ještě vydělí třemi – do celkového skóre se tedy počítá jen jedna třetina.  
+**Celkové skóre**  
+Nakonec sečteš obě části dohromady:  
+Průměr z Truhel (100 %) + průměr z Hradů (⅓) = celkové skóre  
+**Příklad**  
+Průměr v Truhlách: 1 000 → započítává se celých 1 000  
+Průměr v Hradech: 900 → započítává se jen třetina, tedy 300  
 Celkové skóre = 1 000 + 300 = 1 300
 """)
 
