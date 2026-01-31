@@ -255,10 +255,14 @@ st.markdown("""
         color: white !important;
     }
     .expander-wrap {
-        margin-bottom: 4px !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
     .expander-wrap div[data-testid="stExpander"] {
-        margin-bottom: 0 !important;
+        margin: 0 !important;
+    }
+    .expander-wrap + .expander-wrap {
+        margin-top: 2px !important;
     }
     /* Červený expander */
     .danger-expander div[data-testid="stExpander"] > details > summary {
