@@ -685,9 +685,9 @@ Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby j
 
 with st.expander("Kdy jsem v ohrožení?"):
     st.markdown("""
-Aby jsi byl 100% v bezpečí. musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
+Abys byl 100% v bezpečí, musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre vedle tvého jména). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
 
-Pokud máš méně, neznamená to že hned končíš, ale zamysli se, jak bys mohl zlepšit svoje výkony. Protože pokud by jsme mohli získat nějakého velmi silného hráče a nebude v klanu místo, tvoje pozice může být ohrožena.
+Pokud máš méně, neznamená to, že hned končíš, ale zamysli se, jak bys mohl zlepšit svoje výkony. Protože pokud bysme mohli získat nějakého velmi silného hráče a nebude v klanu místo, tvoje pozice může být ohrožena.
 
 Stále platí, že prioritou je pro nás týmovost a slušné chování :)
 """)
