@@ -402,7 +402,7 @@ for hrac in hraci:
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
-            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 360px; flex-wrap: nowrap;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 306px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
             f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
@@ -415,7 +415,7 @@ for hrac in hraci:
         )
     else:
         jmeno = (
-            f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 306px;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
             f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
             f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
@@ -645,19 +645,23 @@ st.markdown(f"""
 
 with st.expander("Jak se počítá Vaše skore?"):
     st.markdown("""
-Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.  
-**Část 1 — Truhly (počítají se naplno)**  
+Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.
+
+Část 1 — Truhly (počítají se naplno)  
 Vezmeš svých posledních 10 her v Truhlách.  
 Sečteš skóre ze všech těchto her a výsledek vydělíš deseti.  
-Tím získáš průměr v Truhlách, který se započítává celý, bez jakékoliv úpravy.  
-**Část 2 — Hrady / Bomby (počítá se jen třetina)**  
+Tím získáš průměr v Truhlách, který se započítává celý, bez jakékoliv úpravy.
+
+Část 2 — Hrady / Bomby (počítá se jen třetina)  
 Vezmeš svých posledních 10 her v Hradech/Bombách.  
 Opět sečteš všechna skóre a výsledek vydělíš deseti.  
-Získáš průměr v Hradech, ale ten se ještě vydělí třemi – do celkového skóre se tedy počítá jen jedna třetina.  
-**Celkové skóre**  
+Získáš průměr v Hradech, ale ten se ještě vydělí třemi – do celkového skóre se tedy počítá jen jedna třetina.
+
+Celkové skóre  
 Nakonec sečteš obě části dohromady:  
-Průměr z Truhel (100 %) + průměr z Hradů (⅓) = celkové skóre  
-**Příklad**  
+Průměr z Truhel (100 %) + průměr z Hradů (⅓) = celkové skóre
+
+Příklad  
 Průměr v Truhlách: 1 000 → započítává se celých 1 000  
 Průměr v Hradech: 900 → započítává se jen třetina, tedy 300  
 Celkové skóre = 1 000 + 300 = 1 300
