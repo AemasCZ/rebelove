@@ -393,15 +393,16 @@ for hrac in hraci:
     if total_recent_games < 20:
         novice_badge_html = (
             f'<span style="display: inline-flex; flex-direction: column; margin-left: 8px; '
-            f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15;">'
-            f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00;">'
-            f'(nem\u00e1 odehr\u00e1no 20 her)</span></span>'
+            f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15; '
+            f'white-space: nowrap;">'
+            f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00; '
+            f'white-space: nowrap;">(nem\u00e1 odehr\u00e1no 20 her)</span></span>'
         )
 
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
-            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 260px; flex-wrap: wrap;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 360px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
             f'{novice_badge_html}'
@@ -411,7 +412,7 @@ for hrac in hraci:
     else:
         if record_badge_html:
             jmeno = (
-                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 260px;">'
+                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
                 f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
                 f'{novice_badge_html}'
                 f'{record_badge_html}'
@@ -420,7 +421,7 @@ for hrac in hraci:
         else:
             if novice_badge_html:
                 jmeno = (
-                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 260px;">'
+                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 360px;">'
                     f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
                     f'{novice_badge_html}'
                     f'</div>'
@@ -663,6 +664,15 @@ Průměr z Truhel (celý) + průměr z Hradů (jen třetina) = tvoje celkové sk
 Průměr v Truhlách = 1 000 → bereš 1 000  
 Průměr v Hradech = 900 → bereš jen třetinu → 300  
 Celkové skóre = 1 000 + 300 = 1 300
+""")
+
+with st.expander("Proč je Truhla důležitější než Hrady/Bomby?"):
+    st.markdown("""
+Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme lize máme určené odměny v Hradech a Bombách.
+
+Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 50-75 tisíc za splnění celého hradu, pokud by jsme ale hráli nejnižší ligu, dostaneme jen např. 1000 spinů za splnění celého hradu a jednotlivé odměny budou také malé (místo 7k spinů třeba jen 500 spinů atd.)
+
+Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby jsou velmi praktické k získání zásob.
 """)
 
 st.markdown("---")
