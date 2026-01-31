@@ -254,8 +254,11 @@ st.markdown("""
     div[data-testid="stExpander"] > details > summary svg {
         color: white !important;
     }
-    div[data-testid="stExpander"] {
+    .expander-wrap {
         margin-bottom: 10px !important;
+    }
+    .expander-wrap div[data-testid="stExpander"] {
+        margin-bottom: 0 !important;
     }
     /* Červený expander */
     .danger-expander div[data-testid="stExpander"] > details > summary {
@@ -653,6 +656,7 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
 with st.expander("Jak se počítá Vaše skore?"):
     st.markdown("""
 Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.
@@ -676,7 +680,9 @@ Průměr v Truhlách: 1 000 → započítává se celých 1 000
 Průměr v Hradech: 900 → započítává se jen třetina, tedy 300  
 Celkové skóre = 1 000 + 300 = 1 300
 """)
+st.markdown('</div>', unsafe_allow_html=True)
 
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
 with st.expander("Proč je Truhla důležitější než Hrady/Bomby?"):
     st.markdown("""
 Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme lize, máme určené odměny v Hradech a Bombách.
@@ -685,8 +691,9 @@ Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 
 
 Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby jsou velmi praktické k získání zásob.
 """)
+st.markdown('</div>', unsafe_allow_html=True)
 
-st.markdown('<div class="danger-expander">', unsafe_allow_html=True)
+st.markdown('<div class="expander-wrap danger-expander">', unsafe_allow_html=True)
 with st.expander("Kdy jsem v ohrožení?"):
     st.markdown("""
 Abys byl 100% v bezpečí, musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre vedle tvého jména). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
@@ -697,12 +704,14 @@ Stále platí, že prioritou je pro nás týmovost a slušné chování :)
 """)
 st.markdown('</div>', unsafe_allow_html=True)
 
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
 with st.expander("Proč mám u jména NOVÁČEK?"):
     st.markdown("""
 Pokud jsi u nás nový a nemáš ještě odehraných alespoň 5 her v Truhle a 5 her v Hradech/Bombách, bereme na tebe speciální ohledy a za tvým jménem, bude po tuto dobu napsáno "NOVÁČEK".
 
 Přechod do nového klanu může být náročný, takže Ti chceme dát dostatek času na aklimatizaci a přizpůsobení se :)
 """)
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
