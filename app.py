@@ -393,15 +393,15 @@ for hrac in hraci:
     if total_recent_games < 20:
         novice_badge_html = (
             f'<span style="display: inline-flex; flex-direction: column; margin-left: 8px; '
-            f'font-size: 0.7rem; font-weight: 700; color: #c70000; line-height: 1.1;">'
-            f'NOVA\u010cEK<span style="font-weight: 500; font-size: 0.65rem; color: #c70000;">'
-            f'(neodehr\u00e1no 20 her)</span></span>'
+            f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15;">'
+            f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00;">'
+            f'(nem\u00e1 odehr\u00e1no 20 her)</span></span>'
         )
 
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
-            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 180px; flex-wrap: wrap;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 260px; flex-wrap: wrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
             f'{novice_badge_html}'
@@ -411,7 +411,7 @@ for hrac in hraci:
     else:
         if record_badge_html:
             jmeno = (
-                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
+                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 260px;">'
                 f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
                 f'{novice_badge_html}'
                 f'{record_badge_html}'
@@ -420,7 +420,7 @@ for hrac in hraci:
         else:
             if novice_badge_html:
                 jmeno = (
-                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
+                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 260px;">'
                     f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
                     f'{novice_badge_html}'
                     f'</div>'
