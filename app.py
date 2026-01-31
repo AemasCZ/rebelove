@@ -388,15 +388,14 @@ for hrac in hraci:
             f'align-self: flex-start;">NEW RECORD ({badge_context})</span>'
         )
 
-    total_recent_games = len(truhly) + len(hrady)
     novice_badge_html = ''
-    if total_recent_games < 20:
+    if len(truhly) < 5 or len(hrady) < 5:
         novice_badge_html = (
             f'<span style="display: inline-flex; flex-direction: column; margin-left: 4px; '
             f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15; '
             f'white-space: nowrap;">'
             f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00; '
-            f'white-space: nowrap;">(nem\u00e1 odehr\u00e1no 20 her)</span></span>'
+            f'white-space: nowrap;">(Nem\u00e1 odehr\u00e1no 10 her)</span></span>'
         )
 
     if hrac_lower in player_images:
