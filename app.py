@@ -470,20 +470,8 @@ def get_color_by_rank(rank, force_text_color=None):
         bg_color = ''
         text_color = 'black'
 
-        if 1 <= rank <= 10:
-            bg_color = '#00cc00'
-            text_color = 'black'
-        elif 11 <= rank <= 30:
-            bg_color = '#c6efce'
-            text_color = 'black'
-        elif 31 <= rank <= 40:
-            bg_color = '#ffeb9c'
-            text_color = 'black'
-        elif 41 <= rank <= 47:
-            bg_color = '#f4cccc'
-            text_color = 'black'
-        elif 48 <= rank <= 50:
-            bg_color = '#ff0000'
+        if 1 <= rank <= 50:
+            bg_color = '#cfe8ff'
             text_color = 'black'
         else:
             return ''
