@@ -376,12 +376,23 @@ for hrac in hraci:
             f'NEW RECORD ({badge_context})</span>'
         )
 
+    total_recent_games = len(truhly) + len(hrady)
+    novice_badge_html = ''
+    if total_recent_games < 20:
+        novice_badge_html = (
+            f'<span style="display: inline-flex; flex-direction: column; margin-left: 8px; '
+            f'font-size: 0.7rem; font-weight: 700; color: #c70000; line-height: 1.1;">'
+            f'NOVA\u010cEK<span style="font-weight: 500; font-size: 0.65rem; color: #c70000;">'
+            f'(neodehr\u00e1no 20 her)</span></span>'
+        )
+
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
             f'<div style="display: flex; align-items: center; gap: 10px; min-width: 180px; flex-wrap: wrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'{novice_badge_html}'
             f'{record_badge_html}'
             f'</div>'
         )
@@ -390,11 +401,20 @@ for hrac in hraci:
             jmeno = (
                 f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
                 f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+                f'{novice_badge_html}'
                 f'{record_badge_html}'
                 f'</div>'
             )
         else:
-            jmeno = hrac
+            if novice_badge_html:
+                jmeno = (
+                    f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
+                    f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+                    f'{novice_badge_html}'
+                    f'</div>'
+                )
+            else:
+                jmeno = hrac
 
     # Připrav hodnoty osobních rekordů s nenápadným "NEW BEST"
     def format_score_value(val):
