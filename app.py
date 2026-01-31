@@ -613,6 +613,11 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
+st.markdown("""
+**Jak se počítá průměrné skóre?**  
+Vezmeme vašich posledních 10 her v Truhlách a 10 posledních her v Hradech/Bombach a tyto čísla sečteme. Truhly protože mají největší prioritu počítáme celé, hrady/bomby jen z jedné třetiny (33%).
+""")
+
 st.markdown("---")
 
 
