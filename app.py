@@ -353,17 +353,12 @@ for hrac in hraci:
     max_hrady = hrady_vsechny['Skóre'].max()
     hrady_new_record = latest_game_is_record(hrady_vsechny, max_hrady)
 
-    # Vážený průměr skóre z posledních 10 her: truhly 100 %, hrady/bomby 33 %
-    # Dělíme 20, nebo skutečným počtem započítaných her, pokud je méně než 20.
+    # Vážený průměr skóre: průměr Truhly (10 posledních) * 1 + průměr Hrady/Bomby (10 posledních) * 0.33
     vazeny = float('nan')
-    truhly_scores = truhly['Skóre'].dropna()
-    hrady_scores = hrady['Skóre'].dropna()
-    total_games = len(truhly_scores) + len(hrady_scores)
-    if total_games > 0:
-        sum_truhly = truhly_scores.sum()
-        sum_hrady = hrady_scores.sum()
-        divisor = 20 if total_games >= 20 else total_games
-        vazeny = (sum_truhly + sum_hrady * 0.33) / divisor
+    if not math.isnan(s_truhla) or not math.isnan(s_hrady):
+        truhla_part = s_truhla if not math.isnan(s_truhla) else 0
+        hrady_part = s_hrady if not math.isnan(s_hrady) else 0
+        vazeny = (truhla_part * 1) + (hrady_part * 0.33)
 
     # Vzhled hráče s obrázkem + badge pro poslední rekord
     hrac_lower = hrac.lower()
@@ -415,8 +410,8 @@ for hrac in hraci:
 
 # Vytvoření DataFrame z výstupního seznamu
 vystup_df = pd.DataFrame(vystup)
-# Seřazení podle váženého průměru
-vystup_df = vystup_df.sort_values(by='⭐ Vážený průměr', na_position='last').reset_index(drop=True)
+# Seřazení podle celkového skóre od největšího po nejmenší
+vystup_df = vystup_df.sort_values(by='⭐ Vážený průměr', ascending=False, na_position='last').reset_index(drop=True)
 # Vložení sloupce 'Pořadí' na začátek
 vystup_df.insert(0, 'Pořadí', range(1, len(vystup_df) + 1))
 
