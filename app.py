@@ -396,14 +396,34 @@ for hrac in hraci:
         else:
             jmeno = hrac
 
+    # Připrav hodnoty osobních rekordů s nenápadným "NEW BEST"
+    def format_score_value(val):
+        return f"{int(val):_}".replace('_', ' ') if pd.notna(val) else '-'
+
+    truhla_record_display = format_score_value(max_truhla)
+    if truhla_new_record and truhla_record_display != '-':
+        truhla_record_display = (
+            f'{truhla_record_display} '
+            f'<span style="color: #c70000; font-size: 0.75rem; font-weight: 700; margin-left: 6px; '
+            f'white-space: nowrap;">NEW BEST</span>'
+        )
+
+    hrady_record_display = format_score_value(max_hrady)
+    if hrady_new_record and hrady_record_display != '-':
+        hrady_record_display = (
+            f'{hrady_record_display} '
+            f'<span style="color: #c70000; font-size: 0.75rem; font-weight: 700; margin-left: 6px; '
+            f'white-space: nowrap;">NEW BEST</span>'
+        )
+
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
     vystup.append({
     '👤 Hráč': jmeno,
     '⭐ Vážený průměr': round(vazeny) if not math.isnan(vazeny) else None,
     '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else None,
-    '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else None,
+    '🏆 Truhla – max. skóre': truhla_record_display,
     '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else None,
-    '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else None,
+    '🏆 Hrady – max. skóre': hrady_record_display,
 })
 
 # Vytvoření DataFrame z výstupního seznamu
@@ -510,7 +530,10 @@ styled_df = styled_df.apply(apply_row_styles, axis=1)
 # Zde také používáme tuple pro odkazování na sloupec
 # Lambda funkce pro formátování čísel s mezerou jako oddělovačem tisíců a bez desetinných míst
 # a s ošetřením pro NaN (Not a Number) hodnoty, které se zobrazí jako '-'
-format_score = lambda x: f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
+def format_score(x):
+    if isinstance(x, str):
+        return x
+    return f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
 
 styled_df = styled_df.format({
     ('Rebelové', '⌀ skóre'): format_score, # Vážené průměrné skóre - celé číslo s mezerami
