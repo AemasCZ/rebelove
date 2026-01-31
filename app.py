@@ -392,7 +392,7 @@ for hrac in hraci:
     novice_badge_html = ''
     if total_recent_games < 20:
         novice_badge_html = (
-            f'<span style="display: inline-flex; flex-direction: column; margin-left: 8px; '
+            f'<span style="display: inline-flex; flex-direction: column; margin-left: 4px; '
             f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15; '
             f'white-space: nowrap;">'
             f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00; '
@@ -405,7 +405,7 @@ for hrac in hraci:
             f'<div style="display: flex; align-items: center; gap: 10px; min-width: 306px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
-            f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
             f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
             f'    {novice_badge_html}'
             f'  </div>'
@@ -417,7 +417,7 @@ for hrac in hraci:
         jmeno = (
             f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 306px;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
-            f'  <div style="display: inline-flex; align-items: center; gap: 8px; white-space: nowrap;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
             f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
             f'    {novice_badge_html}'
             f'  </div>'
