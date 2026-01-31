@@ -403,17 +403,17 @@ for hrac in hraci:
     truhla_record_display = format_score_value(max_truhla)
     if truhla_new_record and truhla_record_display != '-':
         truhla_record_display = (
-            f'{truhla_record_display} '
-            f'<span style="color: #c70000; font-size: 0.75rem; font-weight: 700; margin-left: 6px; '
-            f'white-space: nowrap;">NEW BEST</span>'
+            f'{truhla_record_display}<br>'
+            f'<span style="color: #c70000; font-size: 0.72rem; font-weight: 700; '
+            f'white-space: nowrap;">NOVÝ REKORD</span>'
         )
 
     hrady_record_display = format_score_value(max_hrady)
     if hrady_new_record and hrady_record_display != '-':
         hrady_record_display = (
-            f'{hrady_record_display} '
-            f'<span style="color: #c70000; font-size: 0.75rem; font-weight: 700; margin-left: 6px; '
-            f'white-space: nowrap;">NEW BEST</span>'
+            f'{hrady_record_display}<br>'
+            f'<span style="color: #c70000; font-size: 0.72rem; font-weight: 700; '
+            f'white-space: nowrap;">NOVÝ REKORD</span>'
         )
 
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
