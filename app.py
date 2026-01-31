@@ -254,6 +254,9 @@ st.markdown("""
     div[data-testid="stExpander"] > details > summary svg {
         color: white !important;
     }
+    div[data-testid="stExpander"] {
+        margin-bottom: 10px !important;
+    }
     /* Červený expander */
     .danger-expander div[data-testid="stExpander"] > details > summary {
         background-color: #e00000 !important;
