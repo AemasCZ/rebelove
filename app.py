@@ -401,7 +401,7 @@ for hrac in hraci:
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
-            f'<div style="display: inline-flex; align-items: center; gap: 10px; min-width: 0; width: fit-content; flex-wrap: nowrap;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 306px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
             f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
@@ -414,7 +414,7 @@ for hrac in hraci:
         )
     else:
         jmeno = (
-            f'<div style="display: inline-flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 0; width: fit-content;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 306px;">'
             f'<div style="display: flex; flex-direction: column; gap: 4px;">'
             f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
             f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
