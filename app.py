@@ -254,6 +254,14 @@ st.markdown("""
     div[data-testid="stExpander"] > details > summary svg {
         color: white !important;
     }
+    /* Třetí expander - červený nadpis */
+    div[data-testid="stExpander"]:nth-of-type(3) > details > summary {
+        background-color: #c70000 !important;
+        color: white !important;
+    }
+    div[data-testid="stExpander"]:nth-of-type(3) > details > summary svg {
+        color: white !important;
+    }
 
 </style>
 """, unsafe_allow_html=True)
@@ -673,6 +681,15 @@ Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme li
 Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 50-75 tisíc za splnění celého hradu, pokud by jsme ale hráli nejnižší ligu, dostaneme jen např. 1000 spinů za splnění celého hradu a jednotlivé odměny budou také malé (místo 7k spinů třeba jen 500 spinů atd.)
 
 Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby jsou velmi praktické k získání zásob.
+""")
+
+with st.expander("Kdy jsem v ohrožení?"):
+    st.markdown("""
+Aby jsi byl 100% v bezpečí. musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
+
+Pokud máš méně, neznamená to že hned končíš, ale zamysli se, jak bys mohl zlepšit svoje výkony. Protože pokud by jsme mohli získat nějakého velmi silného hráče a nebude v klanu místo, tvoje pozice může být ohrožena.
+
+Stále platí, že prioritou je pro nás týmovost a slušné chování :)
 """)
 
 st.markdown("---")
