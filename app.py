@@ -353,14 +353,14 @@ for hrac in hraci:
     max_hrady = hrady_vsechny['Skóre'].max()
     hrady_new_record = latest_game_is_record(hrady_vsechny, max_hrady)
 
-    # Vážený průměr skóre (Truhly váha 1, Hrady/Bomby váha 0.33)
+    # Vážený průměr skóre z posledních 10 her: truhly 100 %, hrady/bomby 33 %, dělení 20
     vazeny = float('nan')
-    if not math.isnan(s_truhla) and not math.isnan(s_hrady):
-        vazeny = (s_truhla * 1 + s_hrady * 0.33) / 1.33
-    elif not math.isnan(s_truhla):
-        vazeny = s_truhla
-    elif not math.isnan(s_hrady):
-        vazeny = s_hrady
+    truhly_scores = truhly['Skóre'].dropna()
+    hrady_scores = hrady['Skóre'].dropna()
+    if not truhly_scores.empty or not hrady_scores.empty:
+        sum_truhly = truhly_scores.sum()
+        sum_hrady = hrady_scores.sum()
+        vazeny = (sum_truhly + sum_hrady * 0.33) / 20
 
     # Vzhled hráče s obrázkem + badge pro poslední rekord
     hrac_lower = hrac.lower()
