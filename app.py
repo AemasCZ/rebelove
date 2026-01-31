@@ -275,6 +275,9 @@ st.markdown("""
     div[data-testid="stVerticalBlock"] > div:has(> div[data-testid="stExpander"]) {
         margin-bottom: 2px !important;
     }
+    div[data-testid="stVerticalBlock"] {
+        gap: 2px !important;
+    }
     /* Červený expander */
     .danger-expander div[data-testid="stExpander"] > details > summary {
         background-color: #e00000 !important;
