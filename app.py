@@ -668,7 +668,7 @@ def format_date(d):
 
 # Vykreslení do aplikace
 st.markdown(f"""
-<div style="margin-top: -1rem; margin-bottom: 2rem; font-size: 1.1rem;">
+<div style="margin-top: -0.3rem; margin-bottom: 2rem; font-size: 1.1rem;">
     <strong>📦 Poslední Truhla:</strong> {format_date(posledni_truhla)} &nbsp;&nbsp;|&nbsp;&nbsp;
     <strong>🏰 Poslední Hrady/Bomby:</strong> {format_date(posledni_hrady)}
 </div>
