@@ -470,8 +470,9 @@ def get_color_by_rank(rank, force_text_color=None):
         bg_color = ''
         text_color = 'black'
 
+        # Jednotná světle modrá pro všechny pozice 1–50
         if 1 <= rank <= 50:
-            bg_color = '#cfe8ff'
+            bg_color = '#cfe8ff'  # světlá modrá
             text_color = 'black'
         else:
             return ''
@@ -491,11 +492,18 @@ def apply_row_styles(row):
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
 
-    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové)
-    styles[('Rebelové', 'Pořadí')] = get_color_by_rank(rank, force_text_color='black')
+    # Pokud je rank v rozsahu 1–50, označíme celý řádek stejnou světle modrou
+    base_style = get_color_by_rank(rank, force_text_color='black')
+    if base_style:
+        for col in row.index:
+            styles[col] = base_style
 
-    # 3) Styl pro sloupec '⌀ pořadí' (uvnitř skupiny Rebelové)
-    styles[('Rebelové', '⌀ pořadí')] = get_color_by_rank(rank, force_text_color='black') + 'font-weight: bold;'
+        # Zvýrazníme sloupec '⌀ pořadí' tučně navíc
+        styles[('Rebelové', '⌀ pořadí')] = styles.get(('Rebelové', '⌀ pořadí'), '') + ' font-weight: bold;'
+
+    else:
+        # Pokud není v rozsahu 1–50, necháme výchozí prázdné styly
+        pass
 
     # Stylování černých separátorů
     styles[(' ', ' ')] = 'background-color: black;'
