@@ -5,61 +5,42 @@ from google.oauth2.service_account import Credentials
 import json
 import math
 
-# Nastavení stránky - MUSÍ BÝT JAKO PRVNÍ st příkaz
-st.set_page_config(
-    page_title="Rebelové - Statistiky",
-    page_icon="📊",
-    layout="wide"
-)
-
 # Nastavení přístupového rozsahu pro Google Sheets API
 scope = [
     "https://spreadsheets.google.com/feeds",
     "https://www.googleapis.com/auth/drive"
 ]
 
-# Cachovaná funkce pro načítání dat z Google Sheets
-@st.cache_data(ttl=300)  # Cache na 5 minut (300 sekund)
-def load_data_from_sheets():
-    """Načte data z Google Sheets s cachováním"""
-    # Získání informací o službě z tajných dat ve Streamlitu
-    service_account_info = dict(st.secrets["gcp_service_account"])
-    
-    # Vytvoření přihlašovacích údajů pomocí Google Credentials z knihovny google-auth
-    credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
-    
-    # Autorizace klienta knihovnou gspread
-    client = gspread.authorize(credentials)
-    
-    # Otevření listu podle klíče - VAŠE ID
-    sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
-    
-    # Výběr worksheetu
-    worksheet = sheet.worksheet("výsledky")
-    
-    # Načtení dat
-    data = worksheet.get_all_records()
-    
-    # Převod dat do Pandas DataFrame
-    df = pd.DataFrame(data)
-    
-    # Odstraní první sloupec, pokud vypadá jako index
-    if len(df.columns) > 0:
-        first_col = df.columns[0]
-        if first_col == '' or 'Unnamed' in first_col or df[first_col].apply(lambda x: isinstance(x, int)).all():
-            df = df.drop(columns=[first_col])
-    
-    return df
+# Získání informací o službě z tajných dat ve Streamlitu
+service_account_info = dict(st.secrets["gcp_service_account"])
 
-# Tlačítko pro obnovení dat v horní části stránky
-col1, col2, col3 = st.columns([1, 2, 1])
-with col3:
-    if st.button("🔄 Obnovit data", help="Načte nejnovější data z Google Sheets"):
-        st.cache_data.clear()
-        st.rerun()
+# Vytvoření přihlašovacích údajů pomocí Google Credentials z knihovny google-auth
+credentials = Credentials.from_service_account_info(service_account_info, scopes=scope)
+
+# Autorizace klienta knihovnou gspread
+client = gspread.authorize(credentials)
+
+# Otevření listu podle klíče - VAŠE ID
+sheet = client.open_by_key("1mbeCadh9vQd62BKvLWpBYr67BXMa6UMQW5OjGzl_eHE")
+
+# Výběr worksheetu - změňte "Sheet1" na název vašeho listu
+worksheet = sheet.worksheet("výsledky")
 
 # Načtení dat
-df = load_data_from_sheets()
+data = worksheet.get_all_records()
+
+# Převod dat do Pandas DataFrame
+df = pd.DataFrame(data)
+# Načtení dat
+data = worksheet.get_all_records()
+
+# Převod dat do Pandas DataFrame
+df = pd.DataFrame(data)
+
+# Odstraní první sloupec, pokud vypadá jako index
+first_col = df.columns[0]
+if first_col == '' or 'Unnamed' in first_col or df[first_col].apply(lambda x: isinstance(x, int)).all():
+    df = df.drop(columns=[first_col])
 
 
 
@@ -586,10 +567,16 @@ def apply_row_styles(row):
 
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
+
+<<<<<<< HEAD
+    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové) - jednotné světle modré pozadí
+    styles[('Rebelové', 'Pořadí')] = 'background-color: #cfe8ff; color: black;'
+=======
     # Světle modrá ve sloupci 'Pořadí'
     base_style = get_color_by_rank(rank, force_text_color='black')
     if base_style:
         styles[('Rebelové', 'Pořadí')] = base_style
+>>>>>>> 01c9944446ed38b94af70d3f7209d38763011d8d
 
     # Ještě světlejší modrá ve sloupci '⌀ skóre'
     styles[('Rebelové', '⌀ skóre')] = 'background-color: #e6f3ff; color: black; font-weight: bold;'
