@@ -775,7 +775,7 @@ styled_df = styled_df.set_table_styles([
 styled_df = styled_df.hide(axis='index')
 
 # Titulek a úvodní oddělovač
-st.title("Přehled hráčů Coin Master")
+st.title("Přehled hráčů Coin Master (Rebelové)")
 
 # Výpis posledních dat událostí
 # Vyhledání posledních dat pro Truhla a Hrady/Bomby
