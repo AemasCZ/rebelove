@@ -4,6 +4,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import json
 import math
+import unicodedata
 
 # Nastavení přístupového rozsahu pro Google Sheets API
 scope = [
@@ -198,6 +199,29 @@ st.markdown("""
         background-color: #f8f9fa;
         border-color: #adb5bd;
     }
+
+    /* Navi bar (radio) */
+    div[data-testid="stRadio"] > div {
+        display: flex;
+        gap: 8px;
+        margin: 0 0 1rem 0;
+        padding: 6px;
+        background: #d8d8d8;
+        border-radius: 10px;
+        width: fit-content;
+    }
+    div[data-testid="stRadio"] label {
+        background: #ffffff;
+        border: 1px solid #c9c9c9;
+        border-radius: 8px;
+        padding: 6px 14px;
+        font-weight: 600;
+        cursor: pointer;
+    }
+    div[data-testid="stRadio"] label[data-selected="true"] {
+        background: #ffd24d;
+        border-color: #e0b53e;
+    }
     
     /* Info boxy */
     .stInfo {
@@ -310,6 +334,22 @@ player_images = {
       
 }
 
+def normalize_name(name):
+    return (
+        unicodedata.normalize('NFKD', name)
+        .encode('ascii', 'ignore')
+        .decode('utf-8')
+        .strip()
+        .lower()
+    )
+
+def get_player_image(name):
+    name_lower = name.lower()
+    if name_lower in player_images:
+        return player_images[name_lower]
+    normalized = normalize_name(name)
+    return player_images.get(normalized)
+
 def latest_game_is_record(event_df, max_score):
     """Return True when the most recent game shares the player's top score."""
     if event_df.empty or pd.isna(max_score):
@@ -321,6 +361,81 @@ def latest_game_is_record(event_df, max_score):
     if pd.isna(latest_score):
         return False
     return math.isclose(float(latest_score), float(max_score), rel_tol=1e-9)
+
+def render_leaderboard():
+    st.title("Žebříček – Truhla")
+    truhla_df = df[df['Event'].str.lower() == 'truhla'].copy()
+    truhla_df = truhla_df[pd.notna(truhla_df['Skóre'])]
+    if truhla_df.empty:
+        st.info("Žádná data pro Truhlu.")
+        return
+
+    latest_truhla_date = truhla_df['Datum'].max()
+    latest_truhla_day = latest_truhla_date.date() if pd.notna(latest_truhla_date) else None
+    truhla_df = truhla_df.sort_values(by=['Skóre', 'Datum'], ascending=[False, False]).head(50).reset_index(drop=True)
+
+    rows = []
+    for idx, row in truhla_df.iterrows():
+        rank = idx + 1
+        name = row['Hráč']
+        date_value = row['Datum']
+        score_value = row['Skóre']
+        image_url = get_player_image(name)
+
+        date_label = date_value.strftime('%d.%m.%Y') if pd.notna(date_value) else '-'
+        score_label = f"{int(score_value):_}".replace('_', ' ') if pd.notna(score_value) else '-'
+        is_new = pd.notna(date_value) and latest_truhla_day and date_value.date() == latest_truhla_day
+
+        if image_url:
+            name_html = (
+                f'<div style="display:flex; align-items:center; gap:10px;">'
+                f'<img src="{image_url}" width="40" height="40" style="border-radius:50%; object-fit:cover;">'
+                f'<span style="font-weight:600;">{name}</span>'
+                f'</div>'
+            )
+        else:
+            name_html = f'<span style="font-weight:600;">{name}</span>'
+
+        if is_new:
+            score_html = (
+                f'{score_label} '
+                f'<span style="color:#ffffff; background-color:#c70000; padding:2px 8px; '
+                f'border-radius:999px; font-size:0.75rem; font-weight:700;">NEW</span>'
+            )
+        else:
+            score_html = score_label
+
+        rows.append((rank, name_html, date_label, score_html))
+
+    table_html = [
+        '<table>',
+        '<thead><tr>',
+        '<th>Pořadí</th><th>Hráč</th><th>Datum</th><th>Skóre</th>',
+        '</tr></thead>',
+        '<tbody>'
+    ]
+    for rank, name_html, date_label, score_html in rows:
+        table_html.append(
+            f'<tr><td>{rank}</td><td>{name_html}</td><td>{date_label}</td><td>{score_html}</td></tr>'
+        )
+    table_html.append('</tbody></table>')
+
+    st.markdown(
+        '<div style="margin-top: -0.5rem; margin-bottom: 1rem;">Top 50 nejlepších výkonů z Truhly.</div>',
+        unsafe_allow_html=True
+    )
+    st.markdown("\n".join(table_html), unsafe_allow_html=True)
+
+selected_page = st.radio(
+    "Navigace",
+    options=["Tabulka", "Žebříček"],
+    horizontal=True,
+    label_visibility="collapsed"
+)
+
+if selected_page == "Žebříček":
+    render_leaderboard()
+    st.stop()
 
 # Výpočet dat pro tabulku
 hraci = df['Hráč'].unique()
@@ -503,8 +618,8 @@ def apply_row_styles(row):
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
 
-    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové)
-    styles[('Rebelové', 'Pořadí')] = get_color_by_rank(rank, force_text_color='black')
+    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové) - jednotné světle modré pozadí
+    styles[('Rebelové', 'Pořadí')] = 'background-color: #cfe8ff; color: black;'
 
     # 3) Styl pro sloupec '⌀ pořadí' (uvnitř skupiny Rebelové)
     styles[('Rebelové', '⌀ pořadí')] = get_color_by_rank(rank, force_text_color='black') + 'font-weight: bold;'
@@ -635,18 +750,6 @@ selected_player = st.selectbox(
 # ==========================================================
 # ZDE ZAČÍNÁ KÓD PRO DETAIL HRÁČE
 # ==========================================================
-import unicodedata
-import pandas as pd # Důležité pro pd.notna() a DataFrame stylování!
-
-# Funkce pro normalizaci jména
-def normalize_name(name):
-    return (
-        unicodedata.normalize('NFKD', name)
-        .encode('ascii', 'ignore')
-        .decode('utf-8')
-        .strip()
-        .lower()
-    )
 
 # Funkce get_color_by_rank by měla být definována globálně na začátku vašeho skriptu
 # (tak jak ji již máš pro hlavní tabulku). Pro referenci:
