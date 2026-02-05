@@ -350,6 +350,7 @@ player_images = {
      'michal..': "https://i.imgur.com/CN4h978.png",
      'vlastimil': "https://i.imgur.com/hOVPeqZ.jpeg",
      'filip': "https://i.imgur.com/bXWhcxe.png",
+      'petra': "https://i.imgur.com/0hwa1c9.jpeg",
 
       
       
