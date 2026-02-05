@@ -267,6 +267,50 @@ st.markdown("""
         color: black !important;
     }
 
+    /* Expander - zelený nadpis */
+    div[data-testid="stExpander"] > details {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    div[data-testid="stExpander"] > details > summary {
+        background-color: #2e8b57 !important;
+        color: white !important;
+        border-radius: 8px !important;
+        padding: 8px 14px !important;
+        font-weight: 700 !important;
+        margin: 0 !important;
+    }
+    div[data-testid="stExpander"] > details > summary svg {
+        color: white !important;
+    }
+    .expander-wrap {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    .expander-wrap div[data-testid="stExpander"] {
+        margin: 0 !important;
+    }
+    .expander-wrap + .expander-wrap {
+        margin-top: 2px !important;
+    }
+    div[data-testid="stExpander"] {
+        margin: 0 !important;
+    }
+    div[data-testid="stVerticalBlock"] > div:has(> div[data-testid="stExpander"]) {
+        margin-bottom: 2px !important;
+    }
+    div[data-testid="stVerticalBlock"] {
+        gap: 2px !important;
+    }
+    /* Červený expander */
+    .danger-expander div[data-testid="stExpander"] > details > summary {
+        background-color: #e00000 !important;
+        color: white !important;
+    }
+    .danger-expander div[data-testid="stExpander"] > details > summary svg {
+        color: white !important;
+    }
+
 </style>
 """, unsafe_allow_html=True)
 # Definováni obrázků pro hráče
@@ -468,14 +512,12 @@ for hrac in hraci:
     max_hrady = hrady_vsechny['Skóre'].max()
     hrady_new_record = latest_game_is_record(hrady_vsechny, max_hrady)
 
-    # Vážený průměr pořadí
+    # Vážený průměr skóre: průměr Truhly (10 posledních) * 1 + průměr Hrady/Bomby (10 posledních) * 0.33
     vazeny = float('nan')
-    if not math.isnan(p_truhla) and not math.isnan(p_hrady):
-        vazeny = (p_truhla * 1 + p_hrady * 0.5) / 1.5
-    elif not math.isnan(p_truhla):
-        vazeny = p_truhla
-    elif not math.isnan(p_hrady):
-        vazeny = p_hrady * 1 
+    if not math.isnan(s_truhla) or not math.isnan(s_hrady):
+        truhla_part = s_truhla if not math.isnan(s_truhla) else 0
+        hrady_part = s_hrady if not math.isnan(s_hrady) else 0
+        vazeny = (truhla_part * 1) + (hrady_part * 0.33)
 
     # Vzhled hráče s obrázkem + badge pro poslední rekord
     hrac_lower = hrac.lower()
@@ -489,62 +531,97 @@ for hrac in hraci:
         badge_context = ' & '.join(record_categories)
         record_badge_html = (
             f'<span style="color: #ffffff; background-color: #c70000; padding: 2px 10px; '
-            f'border-radius: 999px; font-size: 0.75rem; font-weight: 700; white-space: nowrap;">'
-            f'NEW RECORD ({badge_context})</span>'
+            f'border-radius: 999px; font-size: 0.72rem; font-weight: 700; white-space: nowrap; '
+            f'align-self: flex-start;">NEW RECORD ({badge_context})</span>'
+        )
+
+    novice_badge_html = ''
+    if len(truhly) < 5 or len(hrady) < 5:
+        novice_badge_html = (
+            f'<span style="display: inline-flex; flex-direction: column; margin-left: 4px; '
+            f'font-size: 0.72rem; font-weight: 700; color: #ff7a00; line-height: 1.15; '
+            f'white-space: nowrap;">'
+            f'NOV\u00c1\u010cEK<span style="font-weight: 600; font-size: 0.65rem; color: #ff7a00; '
+            f'white-space: nowrap;">(Nem\u00e1 odehr\u00e1no 10 her)</span></span>'
         )
 
     if hrac_lower in player_images:
         image_url = player_images[hrac_lower]
         jmeno = (
-            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 180px; flex-wrap: wrap;">'
+            f'<div style="display: flex; align-items: center; gap: 10px; min-width: 306px; flex-wrap: nowrap;">'
             f'<img src="{image_url}" width="60" style="border-radius:50%; object-fit: cover;">'
-            f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
-            f'{record_badge_html}'
+            f'<div style="display: flex; flex-direction: column; gap: 4px;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
+            f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'    {novice_badge_html}'
+            f'  </div>'
+            f'  {record_badge_html}'
+            f'</div>'
             f'</div>'
         )
     else:
-        if record_badge_html:
-            jmeno = (
-                f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap; min-width: 180px;">'
-                f'<span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
-                f'{record_badge_html}'
-                f'</div>'
-            )
-        else:
-            jmeno = hrac
+        jmeno = (
+            f'<div style="display: flex; align-items: center; gap: 10px; flex-wrap: nowrap; min-width: 306px;">'
+            f'<div style="display: flex; flex-direction: column; gap: 4px;">'
+            f'  <div style="display: inline-flex; align-items: center; gap: 6px; white-space: nowrap;">'
+            f'    <span style="font-size: 1.2rem; font-weight: bold;">{hrac}</span>'
+            f'    {novice_badge_html}'
+            f'  </div>'
+            f'  {record_badge_html}'
+            f'</div>'
+            f'</div>'
+        )
+
+    # Připrav hodnoty osobních rekordů s nenápadným "NEW BEST"
+    def format_score_value(val):
+        return f"{int(val):_}".replace('_', ' ') if pd.notna(val) else '-'
+
+    truhla_record_display = format_score_value(max_truhla)
+    if truhla_new_record and truhla_record_display != '-':
+        truhla_record_display = (
+            f'{truhla_record_display}<br>'
+            f'<span style="color: #c70000; font-size: 0.72rem; font-weight: 700; '
+            f'white-space: nowrap;">NEW RECORD</span>'
+        )
+
+    hrady_record_display = format_score_value(max_hrady)
+    if hrady_new_record and hrady_record_display != '-':
+        hrady_record_display = (
+            f'{hrady_record_display}<br>'
+            f'<span style="color: #c70000; font-size: 0.72rem; font-weight: 700; '
+            f'white-space: nowrap;">NEW RECORD</span>'
+        )
 
     # Přidání dat do výstupního seznamu - použijeme původní názvy pro snadnější manipulaci
     vystup.append({
     '👤 Hráč': jmeno,
-    '⭐ Vážený průměr': round(vazeny, 2) if not math.isnan(vazeny) else None,
-    '🔹 Truhla – prům. pořadí': round(p_truhla, 2) if not math.isnan(p_truhla) else None,
+    '⭐ Vážený průměr': round(vazeny) if not math.isnan(vazeny) else None,
     '🌟 Truhla – prům. skóre': round(s_truhla) if not math.isnan(s_truhla) else None,
-    '🏆 Truhla – max. skóre': round(max_truhla) if not math.isnan(max_truhla) else None,
-    '🔹 Hrady – prům. pořadí': round(p_hrady, 2) if not math.isnan(p_hrady) else None,
+    '🏆 Truhla – max. skóre': truhla_record_display,
     '🌟 Hrady – prům. skóre': round(s_hrady) if not math.isnan(s_hrady) else None,
-    '🏆 Hrady – max. skóre': round(max_hrady) if not math.isnan(max_hrady) else None,
+    '🏆 Hrady – max. skóre': hrady_record_display,
 })
 
 # Vytvoření DataFrame z výstupního seznamu
 vystup_df = pd.DataFrame(vystup)
-# Seřazení podle váženého průměru
-vystup_df = vystup_df.sort_values(by='⭐ Vážený průměr', na_position='last').reset_index(drop=True)
+# Seřazení podle celkového skóre od největšího po nejmenší
+vystup_df = vystup_df.sort_values(by='⭐ Vážený průměr', ascending=False, na_position='last').reset_index(drop=True)
 # Vložení sloupce 'Pořadí' na začátek
 vystup_df.insert(0, 'Pořadí', range(1, len(vystup_df) + 1))
 
 # Přejmenování sloupců pro MultiIndex
 # Používáme zde spíše finální názvy pro MultiIndex
 vystup_df.rename(columns={
-    '⭐ Vážený průměr': '⌀ pořadí', # Stále stejný název pro usnadnění
+    '⭐ Vážený průměr': '⌀ skóre', # Vážené průměrné skóre
     '👤 Hráč': 'Hráč' # Stále stejný název pro usnadnění
 }, inplace=True)
 
-# Zaokrouhlení na 2 desetinná místa v rámci dat DataFrame
-vystup_df['⌀ pořadí'] = vystup_df['⌀ pořadí'].round(2)
+# Zaokrouhlení na celé číslo v rámci dat DataFrame
+vystup_df['⌀ skóre'] = vystup_df['⌀ skóre'].round(0)
 
 # Vložení separátorů jako obyčejných sloupců s unikátními názvy
 vystup_df.insert(
-    vystup_df.columns.get_loc('⌀ pořadí') + 1, 
+    vystup_df.columns.get_loc('⌀ skóre') + 1, 
     '__SEP1__', 
     ''
 )
@@ -560,19 +637,17 @@ vystup_df.columns = pd.MultiIndex.from_tuples([
     # Skupina "Rebelové"
     ('Rebelové', 'Pořadí'),
     ('Rebelové', 'Hráč'),
-    ('Rebelové', '⌀ pořadí'),
+    ('Rebelové', '⌀ skóre'),
     
     (' ', ' '), # První oddělovací sloupec - prázdný znak
     
     # Skupina "Truhla"
-    ('Truhla', '⌀ pořadí'),
     ('Truhla', '⌀ body'),
     ('Truhla', 'Osobní rekord'),
     
     ('  ', '  '), # Druhý oddělovací sloupec - dva prázdné znaky
     
     # Skupina "Hrady/Bomby"
-    ('Hrady/Bomby', '⌀ pořadí'),
     ('Hrady/Bomby', '⌀ body'),
     ('Hrady/Bomby', 'Osobní rekord'),
 ])
@@ -585,20 +660,9 @@ def get_color_by_rank(rank, force_text_color=None):
         bg_color = ''
         text_color = 'black'
 
-        if 1 <= rank <= 10:
-            bg_color = '#00cc00'
-            text_color = 'black'
-        elif 11 <= rank <= 30:
-            bg_color = '#c6efce'
-            text_color = 'black'
-        elif 31 <= rank <= 40:
-            bg_color = '#ffeb9c'
-            text_color = 'black'
-        elif 41 <= rank <= 47:
-            bg_color = '#f4cccc'
-            text_color = 'black'
-        elif 48 <= rank <= 50:
-            bg_color = '#ff0000'
+        # Jednotná světle modrá pro všechny pozice 1–50
+        if 1 <= rank <= 50:
+            bg_color = '#cfe8ff'  # světlá modrá
             text_color = 'black'
         else:
             return ''
@@ -618,11 +682,18 @@ def apply_row_styles(row):
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
 
+<<<<<<< HEAD
     # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové) - jednotné světle modré pozadí
     styles[('Rebelové', 'Pořadí')] = 'background-color: #cfe8ff; color: black;'
+=======
+    # Světle modrá ve sloupci 'Pořadí'
+    base_style = get_color_by_rank(rank, force_text_color='black')
+    if base_style:
+        styles[('Rebelové', 'Pořadí')] = base_style
+>>>>>>> 01c9944446ed38b94af70d3f7209d38763011d8d
 
-    # 3) Styl pro sloupec '⌀ pořadí' (uvnitř skupiny Rebelové)
-    styles[('Rebelové', '⌀ pořadí')] = get_color_by_rank(rank, force_text_color='black') + 'font-weight: bold;'
+    # Ještě světlejší modrá ve sloupci '⌀ skóre'
+    styles[('Rebelové', '⌀ skóre')] = 'background-color: #e6f3ff; color: black; font-weight: bold;'
 
     # Stylování černých separátorů
     styles[(' ', ' ')] = 'background-color: black;'
@@ -640,14 +711,15 @@ styled_df = styled_df.apply(apply_row_styles, axis=1)
 # Zde také používáme tuple pro odkazování na sloupec
 # Lambda funkce pro formátování čísel s mezerou jako oddělovačem tisíců a bez desetinných míst
 # a s ošetřením pro NaN (Not a Number) hodnoty, které se zobrazí jako '-'
-format_score = lambda x: f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
+def format_score(x):
+    if isinstance(x, str):
+        return x
+    return f"{int(x):_}".replace('_', ' ') if pd.notna(x) else '-'
 
 styled_df = styled_df.format({
-    ('Rebelové', '⌀ pořadí'): '{:.2f}', # Vážený průměr - 2 desetinná místa
-    ('Truhla', '⌀ pořadí'): '{:.2f}',    # Průměrné pořadí Truhly - 2 desetinná místa
+    ('Rebelové', '⌀ skóre'): format_score, # Vážené průměrné skóre - celé číslo s mezerami
     ('Truhla', '⌀ body'): format_score,  # Průměrné skóre Truhly - formát s mezerami
     ('Truhla', 'Osobní rekord'): format_score, # Osobní rekord Truhly - formát s mezerami
-    ('Hrady/Bomby', '⌀ pořadí'): '{:.2f}', # Průměrné pořadí Hradů/Bomb - 2 desetinná místa
     ('Hrady/Bomby', '⌀ body'): format_score,  # Průměrné skóre Hradů/Bomb - formát s mezerami
     ('Hrady/Bomby', 'Osobní rekord'): format_score, # Osobní rekord Hradů/Bomb - formát s mezerami
 })
@@ -687,9 +759,9 @@ styled_df = styled_df.set_table_styles([
                ('text-indent', '-9999px !important'), ('overflow', 'hidden !important'),
                ('white-space', 'nowrap !important')]},
 
-    # Styly pro DRUHÝ ČERNÝ SLOUPEC (8. vizuální sloupec)
+    # Styly pro DRUHÝ ČERNÝ SLOUPEC (7. vizuální sloupec)
     # Kompletně černý sloupec bez jakéhokoliv textu
-    {'selector': '.dataframe th:nth-child(8), .dataframe td:nth-child(8)',
+    {'selector': '.dataframe th:nth-child(7), .dataframe td:nth-child(7)',
      'props': [('width', '20px !important'), ('min-width', '20px !important'), ('max-width', '20px !important'),
                ('background-color', 'black !important'),
                ('color', 'black !important'), ('font-size', '0 !important'),
@@ -716,11 +788,68 @@ def format_date(d):
 
 # Vykreslení do aplikace
 st.markdown(f"""
-<div style="margin-top: -1rem; margin-bottom: 2rem; font-size: 1.1rem;">
+<div style="margin-top: -0.3rem; margin-bottom: 2rem; font-size: 1.1rem;">
     <strong>📦 Poslední Truhla:</strong> {format_date(posledni_truhla)} &nbsp;&nbsp;|&nbsp;&nbsp;
     <strong>🏰 Poslední Hrady/Bomby:</strong> {format_date(posledni_hrady)}
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
+with st.expander("Jak se počítá Vaše skore?"):
+    st.markdown("""
+Tvoje celkové skóre se skládá ze dvou částí, které se na konci sečtou dohromady.
+
+Část 1 — Truhly (počítají se naplno)  
+Vezmeš svých posledních 10 her v Truhlách.  
+Sečteš skóre ze všech těchto her a výsledek vydělíš deseti.  
+Tím získáš průměr v Truhlách, který se započítává celý, bez jakékoliv úpravy.
+
+Část 2 — Hrady / Bomby (počítá se jen třetina)  
+Vezmeš svých posledních 10 her v Hradech/Bombách.  
+Opět sečteš všechna skóre a výsledek vydělíš deseti.  
+Získáš průměr v Hradech, ale ten se ještě vydělí třemi – do celkového skóre se tedy počítá jen jedna třetina.
+
+Celkové skóre  
+Nakonec sečteš obě části dohromady:  
+Průměr z Truhel (100 %) + průměr z Hradů (⅓) = celkové skóre
+
+Příklad  
+Průměr v Truhlách: 1 000 → započítává se celých 1 000  
+Průměr v Hradech: 900 → započítává se jen třetina, tedy 300  
+Celkové skóre = 1 000 + 300 = 1 300
+""")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
+with st.expander("Proč je Truhla důležitější než Hrady/Bomby?"):
+    st.markdown("""
+Výsledky v Truhle určují jakou budeme hrát ligu a podle toho v jaké jsme lize, máme určené odměny v Hradech a Bombách.
+
+Pokud budeme v nejlepší lize, budeme v těchto turnajích mít odměny např. 50-75 tisíc za splnění celého hradu, pokud by jsme ale hráli nejnižší ligu, dostaneme jen např. 1000 spinů za splnění celého hradu a jednotlivé odměny budou také malé (místo 7000 spinů třeba jen 500 spinů atd.)
+
+Proto je pro nás Truhla nejdůležitější událostí ve hře, Hrady a Bomby jsou velmi praktické k získání zásob.
+""")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="expander-wrap danger-expander">', unsafe_allow_html=True)
+with st.expander("Kdy jsem v ohrožení?"):
+    st.markdown("""
+Abys byl 100% v bezpečí, musíš mít nahráno minimálně 200 000 bodů (v průměrném skore, to je ten modrý sloupec se skóre vedle tvého jména). Pokud plníš toto číslo, nemůžeš být kvůli výkonům vyhozený.
+
+Pokud máš méně, neznamená to, že hned končíš, ale zamysli se, jak bys mohl zlepšit svoje výkony. Protože pokud bysme mohli získat nějakého velmi silného hráče a nebude v klanu místo, tvoje pozice může být ohrožena.
+
+Stále platí, že prioritou je pro nás týmovost a slušné chování :)
+""")
+st.markdown('</div>', unsafe_allow_html=True)
+
+st.markdown('<div class="expander-wrap">', unsafe_allow_html=True)
+with st.expander("Proč mám u jména NOVÁČEK?"):
+    st.markdown("""
+Pokud jsi u nás nový a nemáš ještě odehraných alespoň 5 her v Truhle a 5 her v Hradech/Bombách, bereme na tebe speciální ohledy a za tvým jménem, bude po tuto dobu napsáno "NOVÁČEK".
+
+Přechod do nového klanu může být náročný, takže Ti chceme dát dostatek času na aklimatizaci a přizpůsobení se :)
+""")
+st.markdown('</div>', unsafe_allow_html=True)
 
 st.markdown("---")
 
