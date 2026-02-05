@@ -198,6 +198,7 @@ st.markdown("""
         background-color: #f8f9fa;
         border-color: #adb5bd;
     }
+
     
     /* Info boxy */
     .stInfo {
@@ -567,6 +568,10 @@ def apply_row_styles(row):
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
 
+<<<<<<< HEAD
+    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové) - jednotné světle modré pozadí
+    styles[('Rebelové', 'Pořadí')] = 'background-color: #cfe8ff; color: black;'
+=======
     # Světle modrá ve sloupci 'Pořadí'
     base_style = get_color_by_rank(rank, force_text_color='black')
     if base_style:
