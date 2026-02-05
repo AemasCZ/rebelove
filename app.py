@@ -567,16 +567,10 @@ def apply_row_styles(row):
 
     # Přistupujeme k hodnotám podle tuple (top_level, bottom_level)
     rank = row[('Rebelové', 'Pořadí')]
-
-<<<<<<< HEAD
-    # 1) Styl pro sloupec 'Pořadí' (uvnitř skupiny Rebelové) - jednotné světle modré pozadí
-    styles[('Rebelové', 'Pořadí')] = 'background-color: #cfe8ff; color: black;'
-=======
     # Světle modrá ve sloupci 'Pořadí'
     base_style = get_color_by_rank(rank, force_text_color='black')
     if base_style:
         styles[('Rebelové', 'Pořadí')] = base_style
->>>>>>> 01c9944446ed38b94af70d3f7209d38763011d8d
 
     # Ještě světlejší modrá ve sloupci '⌀ skóre'
     styles[('Rebelové', '⌀ skóre')] = 'background-color: #e6f3ff; color: black; font-weight: bold;'
