@@ -315,8 +315,7 @@ player_images = {
     'karel': "https://i.imgur.com/kV9e3Mb.jpeg",
      'сергій': "https://i.imgur.com/gGiPfpm.png",
      'laduš': "https://i.imgur.com/PZsLWNJ.jpeg",
-    'lukáš.': "https://i.imgur.com/ZseSV5j.jpeg",
-    'lukáš': "https://i.imgur.com/gzNwY8F.png",
+    'lukáš': "https://i.imgur.com/ZseSV5j.jpeg",
     'marek': "https://i.imgur.com/ZUvfonE.jpeg",
     'martin.': "https://i.imgur.com/PtuCqFE.png",
     'martin': "https://i.imgur.com/06wuyGd.png",
@@ -351,6 +350,8 @@ player_images = {
      'vlastimil': "https://i.imgur.com/hOVPeqZ.jpeg",
      'filip': "https://i.imgur.com/bXWhcxe.png",
       'petra': "https://i.imgur.com/0hwa1c9.jpeg",
+      'dominik.': "https://i.imgur.com/tKASBsh.jpeg",
+      'mokina': "https://i.imgur.com/47I2sQB.jpeg",
 
       
       
