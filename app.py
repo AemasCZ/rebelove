@@ -351,7 +351,7 @@ player_images = {
      'filip': "https://i.imgur.com/bXWhcxe.png",
       'petra': "https://i.imgur.com/0hwa1c9.jpeg",
       'dominik.': "https://i.imgur.com/tKASBsh.jpeg",
-      'mokina': "https://i.imgur.com/47I2sQB.jpeg",
+      'monika': "https://i.imgur.com/47I2sQB.jpeg",
 
       
       
