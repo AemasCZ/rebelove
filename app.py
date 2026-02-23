@@ -315,7 +315,7 @@ player_images = {
     'karel': "https://i.imgur.com/kV9e3Mb.jpeg",
      'сергій': "https://i.imgur.com/gGiPfpm.png",
      'laduš': "https://i.imgur.com/PZsLWNJ.jpeg",
-    'lukáš': "https://i.imgur.com/ZseSV5j.jpeg",
+    'lukáš': "https://i.imgur.com/4PgAaWw.jpeg",
     'marek': "https://i.imgur.com/ZUvfonE.jpeg",
     'martin.': "https://i.imgur.com/PtuCqFE.png",
     'martin': "https://i.imgur.com/06wuyGd.png",
