@@ -346,12 +346,13 @@ player_images = {
      'kat': "https://i.imgur.com/42A4IvW.jpeg",
      'jana': "https://i.imgur.com/rtdvkwe.png",
      'michal...': "https://i.imgur.com/gI2ALyH.png",
-     'michal..': "https://i.imgur.com/CN4h978.png",
+     'michal..': "https://i.imgur.com/CN4h978.png", 
      'vlastimil': "https://i.imgur.com/hOVPeqZ.jpeg",
      'filip': "https://i.imgur.com/bXWhcxe.png",
       'petra': "https://i.imgur.com/0hwa1c9.jpeg",
       'dominik.': "https://i.imgur.com/tKASBsh.jpeg",
       'monika': "https://i.imgur.com/47I2sQB.jpeg",
+      'martin': "https://i.imgur.com/PsjnoFS.jpeg",
 
       
       
